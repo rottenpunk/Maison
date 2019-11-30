@@ -1,5 +1,5 @@
 # Maison
-The Maison Framework
+
 The Maison System Framework
 Initial Requirements Guide
 
