@@ -7,13 +7,13 @@ var mysql2 = require("mysql2");
 const Sequelize = require('sequelize');
 
 // Connect to database...
-const sequelize = new Sequelize('maison', 'maison', 'chicken', {
+const database = new Sequelize('maison', 'maison', 'chicken', {
   host: '192.168.0.10',
   dialect: 'mysql'
 });
 
 // If connected to database, log...
-sequelize
+database
   .authenticate()
   .then(() => {
     console.log('Database connection has been established successfully.');
@@ -21,6 +21,8 @@ sequelize
   .catch(err => {
     console.error('Unable to connect to the database:', err);
   });
+
+module.exports = database;
 
 app.use("/admin", admin);
 app.use("/login", login);

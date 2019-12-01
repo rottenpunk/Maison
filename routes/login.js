@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bodyparser = require('body-parser');
+const User = require('../models/user')
 
 router.use(express.urlencoded());
 
@@ -11,8 +12,14 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-    console.log(req.body.username);
-    console.log(req.body.password);
+    // find user in user table, then match hash of password
+    // Find all users
+   // User.findAll().then(users => {
+   //     console.log("All users:", users);
+   // });
+
+    //console.log(req.body.username);
+    //console.log(req.body.password);
 });
 
 module.exports = router;

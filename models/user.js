@@ -1,4 +1,8 @@
-const Model = Sequelize.Model;
+const Sequalize = require('sequelize');
+const  database   = require('../app.js');
+
+const Model = database.Model;
+
 class User extends Model {}
 User.init({
   // attributes
