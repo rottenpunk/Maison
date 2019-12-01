@@ -12,6 +12,7 @@ const sequelize = new Sequelize('maison', 'maison', 'chicken', {
   dialect: 'mysql'
 });
 
+// If connected to database, log...
 sequelize
   .authenticate()
   .then(() => {
@@ -23,5 +24,9 @@ sequelize
 
 app.use("/admin", admin);
 app.use("/login", login);
+
+app.use("", function(req,res) {
+    console.log(req);
+})
 
 http.createServer(app).listen(3000);

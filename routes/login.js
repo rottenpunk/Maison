@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const bodyparser = require('body-parser');
 
+router.use(express.urlencoded());
 
 // /admin/add-product => GET
 router.get('/', function(req, res) {
@@ -9,7 +11,8 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-    
+    console.log(req.body.username);
+    console.log(req.body.password);
 });
 
 module.exports = router;
