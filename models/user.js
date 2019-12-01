@@ -1,15 +1,8 @@
-const Sequalize = require('sequelize');
-const  database   = require('../app.js');
+const Sequelize = require('sequelize');
+const database  = require('../utils/database');
 
-const Model = database.Model;
-
-class User extends Model {}
-User.init({
+const User = database.define('user', {
   // attributes
-  Id: {
-    type: Sequelize.INTEGER,
-    allowNull: false
-  },
   UserId: {
     type: Sequelize.STRING,
     allowNull: false
@@ -26,10 +19,6 @@ User.init({
     type: Sequelize.STRING
     // allowNull defaults to true
   }
-}, {
-  sequelize,
-  modelName: 'user'
-  // options
 });
 
 module.exports = User;

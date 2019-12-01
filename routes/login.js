@@ -13,13 +13,13 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
     // find user in user table, then match hash of password
-    // Find all users
-   // User.findAll().then(users => {
-   //     console.log("All users:", users);
-   // });
-
-    //console.log(req.body.username);
-    //console.log(req.body.password);
+    User.findOne({ where: {UserId: req.body.username}}).then(user => {
+        console.log("user:", user);
+        // Need to compare bcrypt(password) against PassHash
+        //console.log(req.body.password);
+    });
+   
+    
 });
 
 module.exports = router;
