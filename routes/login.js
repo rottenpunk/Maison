@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user')
+const User = require('../models/user');
 
 //
 router.get('/', function(req, res) {
     //
-    res.sendFile(process.cwd() + '/public/index.html');
+    res.render('login', {
+        pageTitle: 'Login'
+    });
 });
 
 router.post('/', function(req, res) {
