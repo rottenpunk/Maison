@@ -11,6 +11,9 @@ const config     = require("./config/config");
 const database   = require("./utils/database");
 const admin      = require("./routes/admin");
 const login      = require("./routes/login");
+const welcome    = require("./routes/welcome");
+const passport   = require('passport');
+require("./config/passport");
 
 var app = express();
 // Cross-site request forgery attack protection...
@@ -57,12 +60,16 @@ app.use(
         }),
         saveUninitialized: false,
         prozy: true 
+        //cookie?
     })
 );
 
 // Now define the top-level route table, which deligates to various route modules...  
+app.use(passport.initialize());
+app.use(passport.session());
 app.use("/admin", admin);
 app.use("/login", login);
+app.use("/welcome", welcome);
 
 // Last route...
 // app.use(errorController.get404);
