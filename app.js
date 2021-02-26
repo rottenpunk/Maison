@@ -5,6 +5,7 @@ const bodyparser = require('body-parser');
 const session    = require('express-session');
 const SessionStore = require('connect-session-sequelize')(session.Store);
 const csrf       = require('csurf');
+var flash = require('connect-flash');
 
 
 const config     = require("./config/config");
@@ -67,9 +68,11 @@ app.use(
 // Now define the top-level route table, which deligates to various route modules...  
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 app.use("/admin", admin);
 app.use("/login", login);
 app.use("/welcome", welcome);
+
 
 // Last route...
 // app.use(errorController.get404);
