@@ -12,14 +12,21 @@ function validatePassword(password, hash) {
     });
     
 }
-function generatePassword(password) {
-    var salt = bcrypt.genSalt(10);
-    var genHash = bcrypt.hash(password, salt);
-    //return hash and salt
-    return {
-        salt: salt,
-        hash: genHash
-    };
+async function generatePassword(password) {
+    try {
+        const saltRounds = await bcrypt.genSalt(10);
+        const genHash = await bcrypt.hash(password, saltRounds);
+        console.log(genHash);
+        return genHash;
+    }
+    catch (error) {
+        console.log(error);
+        return error;
+    }
+
+    return null;
+    
+    
 }
 
 module.exports.validatePassword = validatePassword;

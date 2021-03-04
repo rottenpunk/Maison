@@ -1,0 +1,57 @@
+<%- include('includes/head.ejs') %>
+</head>
+
+  <body>
+
+      
+    <div class="col-sm-6 mx-3">
+        <h1 class="text-center"> Maison Framework Admin Page</h1>
+      <form action="/admin" method="POST">
+        <div class="form-group my-3">
+          <label for="userName">Username</label>
+          <input type="userName" name="username" class="form-control" id="inputUsername" aria-describedby="userNameHelp" placeholder="Enter username">
+          <div class="my-3">
+            <label for="inputPassword">Name</label>
+            <input type="name" name="name" class="form-control" id="name" placeholder="Name">
+          </div>
+          <div class="my-3">
+            <label for="inputPassword">Password</label>
+            <input type="password" name="password" class="form-control" id="inputPassword1" placeholder="Password">
+          </div>
+          <div class="my-3">
+            <label for="email">E-mail</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="E-mail">
+          </div>
+          <div class="my-3">
+          <button type="submit" class="btn btn-primary" type="submit" name="adminBttn" value="Find">Find</button> 
+          <button type="submit" class="btn btn-primary" type="submit" name="adminBttn" value="Add">Add</button> 
+          <button type="submit" class="btn btn-primary" type="submit" name="adminBttn" value="Update">Update</button> 
+          <button type="submit" class="btn btn-primary" type="submit" name="adminBttn" value="Delete">Delete</button>
+          </div>
+        </div>
+     </div>
+  </form>
+  <% if (user) { %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Username</th>
+          <th scope="col">Name</th>
+          <th scope="col">E-mail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= user["UserId"] %></td>
+          <td><%= user["Name"] %></td>
+          <td><%= user["Email"] %></td>
+        </tr>
+      </tbody>
+    </table>
+  <% } %>
+
+
+<%- include('includes/end.ejs') %>
+
+ 
+ 

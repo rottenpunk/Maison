@@ -2,6 +2,8 @@ const Sequelize = require('sequelize');
 const database  = require('../utils/database');
 
 const User = database.define('user', {
+
+
   // attributes
   UserId: {
     type: Sequelize.STRING,

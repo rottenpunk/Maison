@@ -9,7 +9,7 @@ module.exports  = new Sequelize(
     config.database_username, 
     config.database_password,
     {
-        host: '192.168.0.10',
+        host: '192.168.0.12',
         dialect: 'mysql'
     }
 );

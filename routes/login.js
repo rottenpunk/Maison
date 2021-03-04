@@ -4,14 +4,14 @@ const User = require('../models/user');
 const passport   = require('passport');
 var flash = require('connect-flash');
 
+
 router.get('/', function(req, res) {
     console.log("login page");
     res.render('login', {
         pageTitle: 'Login',
         message: req.flash('error')
-        
     });
-    console.log(req.flash('error'));
+    
 });
 
 
@@ -21,8 +21,7 @@ router.post('/', passport.authenticate('local',
     successRedirect: '/welcome',
     failureRedirect: '/login',
     failureFlash: 'Invalid username or password.',
-    }
-   ),
+    }),
     function(req, res) { 
     // At some point it would be a good idea to validate the user's ip address.
     // That means that we should save the ip address when we validate the user and
