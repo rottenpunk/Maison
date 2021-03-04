@@ -2,7 +2,7 @@
 </head>
 
   <body>
-
+    <%-include('includes/navigation.ejs') %>
       
     <div class="col-sm-6 mx-3">
         <h1 class="text-center"> Maison Framework Admin Page</h1>
@@ -27,11 +27,12 @@
           <button type="submit" class="btn btn-primary" type="submit" name="adminBttn" value="Add">Add</button> 
           <button type="submit" class="btn btn-primary" type="submit" name="adminBttn" value="Update">Update</button> 
           <button type="submit" class="btn btn-primary" type="submit" name="adminBttn" value="Delete">Delete</button>
+          <button type="submit" class="btn btn-primary" type="submit" name="adminBttn" value="Show All">Show All</button>
           </div>
         </div>
      </div>
   </form>
-  <% if (user) { %>
+  <% if (users) { %>
     <table class="table">
       <thead>
         <tr>
@@ -41,11 +42,13 @@
         </tr>
       </thead>
       <tbody>
+        <% users.forEach(user => { %>
         <tr>
-          <td><%= user["UserId"] %></td>
-          <td><%= user["Name"] %></td>
-          <td><%= user["Email"] %></td>
+          <td><%= user["dataValues"]["UserId"] %></td>
+          <td><%= user["dataValues"]["Name"] %></td>
+          <td><%= user["dataValues"]["Email"] %></td>
         </tr>
+      <% }) %>
       </tbody>
     </table>
   <% } %>
