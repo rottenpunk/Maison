@@ -2,14 +2,20 @@ const express = require('express');
 const User = require('../models/user');
 const generatePassword = require('../utils/passwordUtils').generatePassword;
 const router = express.Router();
+const isAdmin = require('../middleware/is-admin');
 
 // /admin/add-product => GET
-router.get('/', function(req, res) {
+router.get('/', isAdmin, function(req, res) {
     console.log("Hello from Routes");
-    res.render('admin', {pageTitle: 'Admin', users: null});
+    res.render('admin', {
+        pageTitle: 'Admin', 
+        admin: req.session.isAdmin,
+        isLoggedIn: req.session.isLoggedIn,
+        users: null
+    });
 });
 
-router.post('/', function(req, res) {
+router.post('/', isAdmin, function(req, res) {
       console.log("post method");
 
 
@@ -19,6 +25,8 @@ router.post('/', function(req, res) {
             if(user) { 
                 console.log(user);
                 res.render('admin', {
+                    admin: req.session.isAdmin,
+                    isLoggedIn: req.session.isLoggedIn,
                     pageTitle: 'Admin', 
                     users: user
             });
@@ -41,7 +49,15 @@ router.post('/', function(req, res) {
                 Email: req.body.email
             })
               .then((user) => {
-                console.log(user);
+                user.save();
+                userArray = [];
+                userArray.push(user);
+                res.render('admin', {
+                    admin: req.session.isAdmin,
+                    isLoggedIn: req.session.isLoggedIn,
+                    pageTitle: 'Admin', 
+                    users: userArray
+                });
               })
               .catch((err) => {
                 console.log(err);
@@ -80,6 +96,8 @@ router.post('/', function(req, res) {
                 userArray = [];
                 userArray.push(user);
                 res.render('admin', {
+                    admin: req.session.isAdmin,
+                    isLoggedIn: req.session.isLoggedIn,
                     pageTitle: 'Admin', 
                     users: userArray
                 });
@@ -92,20 +110,37 @@ router.post('/', function(req, res) {
 
       }
       if (req.body.adminBttn==='Delete') {
-        User.findAll({where: { UserId: req.body.username }})
+        User.findOne({where: { UserId: req.body.username }})
         .then((user) => {
-            user.destroy();
-        })
-        .catch((err) => {
-            console.log(err);
-            return err;
-        })
+            user.destroy().then(() => {
+                User.findAll()
+                .then((users) => {
+                    res.render('admin', {
+                        admin: req.session.isAdmin,
+                        isLoggedIn: req.session.isLoggedIn,
+                        pageTitle: 'Admin', 
+                        users: users
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
+                    return err;
+                    })
+                })
+                .catch((err) => {
+                    console.log(err);
+                    return err;
+                });
+            })
+            
       }
 
       if (req.body.adminBttn==='Show All') {
           User.findAll()
           .then((users) => {
             res.render('admin', {
+                admin: req.session.isAdmin,
+                isLoggedIn: req.session.isLoggedIn,
                 pageTitle: 'Admin', 
                 users: users
             });
@@ -113,7 +148,7 @@ router.post('/', function(req, res) {
           .catch((err) => {
               console.log(err);
               return err;
-          })
+          });
       }
 
 

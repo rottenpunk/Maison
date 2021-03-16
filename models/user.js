@@ -20,6 +20,10 @@ const User = database.define('user', {
   Email: {
     type: Sequelize.STRING
     // allowNull defaults to true
+  },
+
+  isAdmin: {
+    type: Sequelize.INTEGER
   }
 });
 

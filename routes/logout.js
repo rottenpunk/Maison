@@ -2,15 +2,19 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const passport   = require('passport');
+var flash = require('connect-flash');
 const isAuth = require('../middleware/is-auth');
 
 router.get('/', isAuth, function(req, res) {
-    console.log("welcome page");
-    res.render('welcome', {
+    req.session.isLoggedIn = false;
+    req.session.isAdmin = false;
+    res.render('login', {
+        isLoggedIn: req.session.isLoggedIn,
+        pageTitle: 'Login',
         admin: req.session.isAdmin,
-        pageTitle: 'Welcome',
-        isLoggedIn: req.session.isLoggedIn
+        message: req.flash('error')
     });
+
 });
 
 module.exports = router;

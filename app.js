@@ -12,6 +12,7 @@ const config     = require("./config/config");
 const database   = require("./utils/database");
 const admin      = require("./routes/admin");
 const login      = require("./routes/login");
+const logout   = require("./routes/logout");
 const welcome    = require("./routes/welcome");
 const passport   = require('passport');
 require("./config/passport");
@@ -60,8 +61,8 @@ app.use(
             db: database
         }),
         saveUninitialized: false,
-        prozy: true 
-        //cookie?
+        prozy: true,
+        
     })
 );
 
@@ -72,6 +73,7 @@ app.use(flash());
 app.use("/admin", admin);
 app.use("/login", login);
 app.use("/welcome", welcome);
+app.use("/logout", logout);
 
 
 // Last route...
