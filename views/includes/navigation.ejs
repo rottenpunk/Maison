@@ -5,18 +5,21 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
         
         <!--<a class="nav-item nav-link" href="/login"> Login </span></a>--> 
-
+        <ul class="navbar-nav mr auto mt-2 mt-lg-0">
           <% if (admin === 1) { %>
-          <a class="nav-item nav-link" href="/admin">Admin</a>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin">Admin</a>
+            </li>
           <% } %>
           <% if (isLoggedIn === true) { %>
-          <a class="nav-item nav-link" href="/logout" action="GET">Log Out</a>
+            <li class="nav-item">
+              <a class="nav-item nav-link" href="/logout" action="GET">Log Out</a>
+            </li>
           <% } %>
-          
-        </div>
+        </ul>
+        
       </div>
     </nav>
   <% } %> 

@@ -18,7 +18,6 @@ router.get('/', function(req, res) {
 });
 
 
-
 router.post('/', passport.authenticate('local', 
     { 
     successRedirect: false,
@@ -28,12 +27,14 @@ router.post('/', passport.authenticate('local',
     function(req, res) { 
         req.session.isLoggedIn = true;
         req.session.isAdmin = req.user.dataValues.isAdmin;
-        res.redirect('/welcome');
         var ip = req.headers['x-forwarded-for'] || 
             req.connection.remoteAddress || 
             req.socket.remoteAddress ||
             (req.connection.socket ? req.connection.socket.remoteAddress : null);
         console.log("req ip addresss: " + ip);
+        req.session.save(function(err) {
+            res.redirect('/welcome');
+        })
    
     
 });

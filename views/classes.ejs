@@ -1,0 +1,163 @@
+<%- include('includes/head.ejs') %>
+</head>
+
+  <body>
+    <%-include('includes/navigation.ejs') %>
+      
+    <div class="col-sm-6 mx-3">
+        <h1 class="text-center"> Classes Page</h1>
+
+        <div class="container" id="myInput">
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Level
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Intro</a>
+            <a class="dropdown-item" href="#">Intermediate</a>
+            <a class="dropdown-item" href="#">Advanced</a>
+          </div>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Style
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Jazz</a>
+            <a class="dropdown-item" href="#">Ballet</a>
+            <a class="dropdown-item" href="#">Hip Hop</a>
+            <a class="dropdown-item" href="#">Acro</a>
+            <a class="dropdown-item" href="#">Tap</a>
+          </div>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Age
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">6+</a>
+            <a class="dropdown-item" href="#">8+</a>
+            <a class="dropdown-item" href="#">10+</a>
+            <a class="dropdown-item" href="#">Adult</a>
+          </div>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Day
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Monday</a>
+            <a class="dropdown-item" href="#">Tuesday</a>
+            <a class="dropdown-item" href="#">Wednesday</a>
+            <a class="dropdown-item" href="#">Thursday</a>
+            <a class="dropdown-item" href="#">Friday</a>
+          </div>
+        </div>
+      </div>
+
+        <table class="table" id="myTable">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Class ID</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">Class Name</th>
+                <th scope="col">Level</th>
+                <th scope="col">Age Range</th>
+                <th scope="col">Instructor</th>
+                <th scope="col">Day of Week</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>6:00</td>
+                <td>Tap</td>
+                <td>Intro</td>
+                <td>8+</td>
+                <td>Mark</td>
+                <td>Monday</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>6:30</td>
+                <td>Jazz I</td>
+                <td>Intro</td>
+                <td>8+</td>
+                <td>Mason</td>
+                <td>Monday</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>4:00</td>
+                <td>Ballet</td>
+                <td>Intro</td>
+                <td>6+</td>
+                <td>Lauren</td>
+                <td>Tuesday</td>
+              </tr>
+              <tr>
+                <th scope="row">4</th>
+                <td>5:30</td>
+                <td>Ballet/Tap</td>
+                <td>Intermediate</td>
+                <td>8+</td>
+                <td>Shelby</td>
+                <td>Tuesday</td>
+              </tr>
+              <tr>
+                <th scope="row">5</th>
+                <td>6:00</td>
+                <td>Jazz II</td>
+                <td>Intermediate</td>
+                <td>10+</td>
+                <td>Cindy</td>
+                <td>Wednesday</td>
+              </tr>
+              <tr>
+                <th scope="row">6</th>
+                <td>7:00</td>
+                <td>Pointe</td>
+                <td>Advanced</td>
+                <td>13+</td>
+                <td>Anastasia</td>
+                <td>Wednesday</td>
+              </tr>
+              <tr>
+                <th scope="row">7</th>
+                <td>8:00</td>
+                <td>Acro</td>
+                <td>Intermediate</td>
+                <td>8+</td>
+                <td>Shelby</td>
+                <td>Thursday</td>
+              </tr>
+              <tr>
+                <th scope="row">8</th>
+                <td>5:30</td>
+                <td>Hip Hop </td>
+                <td>Intro</td>
+                <td>6+</td>
+                <td>Mark</td>
+                <td>Friday</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
+    <script>
+      $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          console.log(value);
+          $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+        });
+      });
+      </script>
+
+
+<%- include('includes/end.ejs') %>
+
+ 
+ 
