@@ -1,162 +1,109 @@
 <%- include('includes/head.ejs') %>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.js"></script>
+  <script>
+    var app = angular.module("exampleApp", []);
+    app.controller('defaultCtrl', function ($scope) {
+      $scope.DaysArray = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+      $scope.products = [
+        {"ClassID":"713","StartTime":"04:30","EndTime":"05:30","ClassName":"IS INT ACRO JAZZ","Level":"","AgeRange":"7+","Styles":"Acro","Instructor":"Kyle Walker","StudioNumber":"3","DayOfWeek":"4","LengthOfClass":"0","MaximumEnroll":"20","CurrentlyEnrolled":"15"},
+        {"ClassID":"492","StartTime":"03:30","EndTime":"04:30","ClassName":"ZM BEG ACRO JAZZ 7+","Level":"","AgeRange":"7+","Styles":"Acro","Instructor":"Kyle Walker","StudioNumber":"2","DayOfWeek":"1","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"2"},
+        {"ClassID":"708","StartTime":"04:30","EndTime":"05:30","ClassName":"IS BEG ACRO JAZZ 7+","Level":"","AgeRange":"7+","Styles":"Acro","Instructor":"Kyle Walker","StudioNumber":"3","DayOfWeek":"2","LengthOfClass":"0","MaximumEnroll":"20","CurrentlyEnrolled":"20"},
+        {"ClassID":"480","StartTime":"05:30","EndTime":"06:30","ClassName":"ZM BEG ACRO JAZZ 7+","Level":"","AgeRange":"7+","Styles":"Acro","Instructor":"Danielle Daguman ","StudioNumber":"9","DayOfWeek":"2","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"6"},
+        {"ClassID":"74","StartTime":"05:30","EndTime":"06:30","ClassName":"ZM LYRICAL I 8+","Level":"","AgeRange":"8+","Styles":"Lyrical","Instructor":"Jennifer Beith","StudioNumber":"7","DayOfWeek":"1","LengthOfClass":"60","MaximumEnroll":"0","CurrentlyEnrolled":"5"},
+        {"ClassID":"163","StartTime":"03:30","EndTime":"04:30","ClassName":"ZM BALLET I 8+","Level":"","AgeRange":"8+","Styles":"Ballet","Instructor":"Lori Murphy","StudioNumber":"3","DayOfWeek":"1","LengthOfClass":"60","MaximumEnroll":"0","CurrentlyEnrolled":"4"},
+        {"ClassID":"467","StartTime":"03:30","EndTime":"04:30","ClassName":"ZM JAZ\/LYR I 8+","Level":"","AgeRange":"8+","Styles":"Jazz","Instructor":"Michelle Rizzuto Richey","StudioNumber":"2","DayOfWeek":"3","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"1"},
+        {"ClassID":"169","StartTime":"04:30","EndTime":"05:30","ClassName":"ZM JAZZ I 8+","Level":"","AgeRange":"8+","Styles":"Jazz","Instructor":"Brandi Freas-Cusick","StudioNumber":"3","DayOfWeek":"1","LengthOfClass":"60","MaximumEnroll":"0","CurrentlyEnrolled":"0"},
+        {"ClassID":"498","StartTime":"10:00","EndTime":"11:00","ClassName":"ZM BALLET I 8+","Level":"","AgeRange":"8+","Styles":"Ballet","Instructor":"Nicky Wagg","StudioNumber":"8","DayOfWeek":"6","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"2"},
+        {"ClassID":"372","StartTime":"05:30","EndTime":"06:30","ClassName":"ZM HH BEG 10+","Level":"","AgeRange":"10+","Styles":"Hip Hop","Instructor":"Hank Schmidt","StudioNumber":"9","DayOfWeek":"1","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"3"},
+        {"ClassID":"801","StartTime":"04:30","EndTime":"05:30","ClassName":"IS K-POP 10+","Level":"","AgeRange":"10+","Styles":"K-Pop","Instructor":"Hannah Kon","StudioNumber":"2","DayOfWeek":"5","LengthOfClass":"0","MaximumEnroll":"30","CurrentlyEnrolled":"19"},
+        {"ClassID":"3","StartTime":"05:30","EndTime":"06:30","ClassName":"ZM BALLET I 10+AD","Level":"","AgeRange":"10+","Styles":"Ballet","Instructor":"Nicky Wagg","StudioNumber":"7","DayOfWeek":"4","LengthOfClass":"60","MaximumEnroll":"0","CurrentlyEnrolled":"7"},
+        {"ClassID":"131","StartTime":"07:00","EndTime":"08:00","ClassName":"ZM BALLET I 10+","Level":"","AgeRange":"10+","Styles":"Ballet","Instructor":"Brandi Freas-Cusick","StudioNumber":"3","DayOfWeek":"1","LengthOfClass":"60","MaximumEnroll":"0","CurrentlyEnrolled":"2"},
+        {"ClassID":"71","StartTime":"06:30","EndTime":"07:30","ClassName":"ZM TAP I-B 10+","Level":"","AgeRange":"10+","Styles":"Tap","Instructor":"Jennifer Beith","StudioNumber":"7","DayOfWeek":"1","LengthOfClass":"60","MaximumEnroll":"0","CurrentlyEnrolled":"0"},
+        {"ClassID":"546","StartTime":"06:30","EndTime":"07:30","ClassName":"ZM K-POP 10+","Level":"","AgeRange":"10+","Styles":"K-Pop","Instructor":"Hank Schmidt","StudioNumber":"8","DayOfWeek":"3","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"8"},
+        {"ClassID":"481","StartTime":"06:30","EndTime":"07:30","ClassName":"ZM LYRICAL I 10+","Level":"","AgeRange":"10+","Styles":"Lyrical","Instructor":"Danielle Daguman ","StudioNumber":"9","DayOfWeek":"2","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"5"},
+        {"ClassID":"29","StartTime":"04:30","EndTime":"05:30","ClassName":"ZM TT II-B & UP 10+","Level":"","AgeRange":"10+","Styles":"Turns\/Tech","Instructor":"Bobby Amamizu","StudioNumber":"1","DayOfWeek":"1","LengthOfClass":"60","MaximumEnroll":"0","CurrentlyEnrolled":"2"},
+        {"ClassID":"247","StartTime":"06:30","EndTime":"07:30","ClassName":"ZM JAZZ II-B+ 10+","Level":"","AgeRange":"10+","Styles":"Jazz","Instructor":"Bobby Amamizu","StudioNumber":"1","DayOfWeek":"1","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"4"}
+      ];
+      console.log("Here in controller");
+    });
+  </script>
+
 </head>
 
-  <body>
-    <%-include('includes/navigation.ejs') %>
+<body ng-app="exampleApp">
+  <%-include('includes/navigation.ejs') %>
+    
+  <div class="col-sm-12 mx-3" ng-controller="defaultCtrl">
+      <h1 class="text-center"> Select New Classes</h1>
+
+    <div class="container" id="myInput">
+      <div>
+        <select class="selectpicker" ng-model="Level" data-style="btn-primary" show-tick>
+          <option value="">Select Level</option>
+          <option value="Beginning">Intro</option>
+          <option value="Intermediate">Intermediate</option>
+          <option value="Advanced">Advanced</option>
+        </select>
       
-    <div class="col-sm-6 mx-3">
-        <h1 class="text-center"> Classes Page</h1>
-
-        <div class="container" id="myInput">
-        <div class="btn-group">
-          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Level
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Intro</a>
-            <a class="dropdown-item" href="#">Intermediate</a>
-            <a class="dropdown-item" href="#">Advanced</a>
-          </div>
-        </div>
-        <div class="btn-group">
-          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Style
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Jazz</a>
-            <a class="dropdown-item" href="#">Ballet</a>
-            <a class="dropdown-item" href="#">Hip Hop</a>
-            <a class="dropdown-item" href="#">Acro</a>
-            <a class="dropdown-item" href="#">Tap</a>
-          </div>
-        </div>
-        <div class="btn-group">
-          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Age
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">6+</a>
-            <a class="dropdown-item" href="#">8+</a>
-            <a class="dropdown-item" href="#">10+</a>
-            <a class="dropdown-item" href="#">Adult</a>
-          </div>
-        </div>
-        <div class="btn-group">
-          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Day
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Monday</a>
-            <a class="dropdown-item" href="#">Tuesday</a>
-            <a class="dropdown-item" href="#">Wednesday</a>
-            <a class="dropdown-item" href="#">Thursday</a>
-            <a class="dropdown-item" href="#">Friday</a>
-          </div>
-        </div>
+        <select class="selectpicker" ng-model="Style" data-style="btn-primary" show-tick>
+          <option value="">Select Style</option>
+          <option value="Jazz">Jazz</option>
+          <option value="Ballet">Ballet</option>
+          <option value="Hip Hop">Hip Hop</option>
+          <option value="Acro">Acro</option>
+          <option value="Tap">Tap</option>
+        </select>
+      
+        <select class="selectpicker" ng-model="AgeRange" data-style="btn-primary" show-tick>
+          <option value="">Select Age Range</option>
+          <option value="6+">6+</option>
+          <option value="7+">7+</option>
+          <option value="8+">8+</option>
+          <option value="10+">10+</option>
+          <option value="Adult">Adult</option>
+        </select>
+      
+        <select class="selectpicker" ng-model="DayOfWeek" data-style="btn-primary" show-tick>
+          <option value="">Select Day</option>
+          <option value="0">Mondays</option>
+          <option value="1">Tuesdays</option>
+          <option value="2">Wednesdays</option>
+          <option value="3">Thursdays</option>
+          <option value="4">Fridays</option>
+          <option value="5">Saturdays</option>
+          <option value="6">Sundays</option>
+        </select>
       </div>
-
-        <table class="table" id="myTable">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">Class ID</th>
-                <th scope="col">Start Time</th>
-                <th scope="col">Class Name</th>
-                <th scope="col">Level</th>
-                <th scope="col">Age Range</th>
-                <th scope="col">Instructor</th>
-                <th scope="col">Day of Week</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>6:00</td>
-                <td>Tap</td>
-                <td>Intro</td>
-                <td>8+</td>
-                <td>Mark</td>
-                <td>Monday</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>6:30</td>
-                <td>Jazz I</td>
-                <td>Intro</td>
-                <td>8+</td>
-                <td>Mason</td>
-                <td>Monday</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>4:00</td>
-                <td>Ballet</td>
-                <td>Intro</td>
-                <td>6+</td>
-                <td>Lauren</td>
-                <td>Tuesday</td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td>5:30</td>
-                <td>Ballet/Tap</td>
-                <td>Intermediate</td>
-                <td>8+</td>
-                <td>Shelby</td>
-                <td>Tuesday</td>
-              </tr>
-              <tr>
-                <th scope="row">5</th>
-                <td>6:00</td>
-                <td>Jazz II</td>
-                <td>Intermediate</td>
-                <td>10+</td>
-                <td>Cindy</td>
-                <td>Wednesday</td>
-              </tr>
-              <tr>
-                <th scope="row">6</th>
-                <td>7:00</td>
-                <td>Pointe</td>
-                <td>Advanced</td>
-                <td>13+</td>
-                <td>Anastasia</td>
-                <td>Wednesday</td>
-              </tr>
-              <tr>
-                <th scope="row">7</th>
-                <td>8:00</td>
-                <td>Acro</td>
-                <td>Intermediate</td>
-                <td>8+</td>
-                <td>Shelby</td>
-                <td>Thursday</td>
-              </tr>
-              <tr>
-                <th scope="row">8</th>
-                <td>5:30</td>
-                <td>Hip Hop </td>
-                <td>Intro</td>
-                <td>6+</td>
-                <td>Mark</td>
-                <td>Friday</td>
-              </tr>
-            </tbody>
-          </table>
     </div>
 
-    <script>
-      $(document).ready(function(){
-        $("#myInput").on("keyup", function() {
-          var value = $(this).val().toLowerCase();
-          console.log(value);
-          $("#myTable tr").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-          });
-        });
-      });
-      </script>
+    <table class="table" id="myTable">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Class Name</th>
+            <th scope="col">Day</th>
+            <th scope="col">Time</th>
+            <th scope="col">Level</th>
+            <th scope="col">Age Range</th>
+            <th scope="col">Style</th>
+            <th scope="col">Instructor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="p in products">
+            <td>{{p.ClassName}}</td>
+            <td>{{DaysArray[p.DayOfWeek]}}s</td>
+            <td>{{p.StartTime}}</td>
+            <td>{{p.Level}}</td>
+            <td>{{p.AgeRange}}</td>
+            <td>{{p.Styles}}</td>
+            <td>{{p.Instructor}}</td>
+          </tr>
+        </tbody>
+        
+      </table>
+  </div>
 
-
+  
 <%- include('includes/end.ejs') %>
 
  
