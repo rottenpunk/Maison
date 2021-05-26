@@ -15,7 +15,8 @@ const login      = require("./routes/login");
 const logout     = require("./routes/logout");
 const welcome    = require("./routes/welcome");
 const passport   = require('passport');
-const classes   = require('./routes/classes');
+const classes    = require('./routes/classes');
+const registration = require('./routes/registration');
 require("./config/passport");
 
 var app = express();
@@ -76,6 +77,7 @@ app.use("/login", login);
 app.use("/welcome", welcome);
 app.use("/logout", logout);
 app.use("/classes", classes);
+app.use("/registration", registration);
 
 
 // Last route...
