@@ -1,0 +1,300 @@
+<%- include('includes/head.ejs') %>
+
+</head>
+
+<body>
+    <%-include('includes/navigation.ejs') %>
+   
+    <div class="container">
+        <h1>Registration & Waiver Form</h1>
+        <form method="POST" action="">  
+            <div>
+
+                <div class="row form-outline mb-4">
+                    <legend>
+                        Student Name    
+                        <span class="required" aria-hidden="true">*</span>              
+                    </legend>
+                    <div  class="form-group col">
+                        <input class="form-control" name="fname" id="firstname" type="text" maxlength="30" aria-required="true" placeholder="First Name" />
+                    </div>
+                    <div class="form-group col">
+                        <input class="form-control" name="lname" id="lastname"  type="text" maxlength="30" aria-required="true" placeholder="Last Name"/>
+                    </div>
+                </div>
+                
+                <div class="row form-outline mb-4">
+                    <legend>
+                        Parent Name
+                        <span class="required" aria-hidden="true">*</span>
+                    </legend>
+                    <div class="form-group col">
+                        <input class="form-control" name="fname" type="text" maxlength="30" aria-required="true" placeholder="First Name"/>
+                    </div>
+                    <div class="form-group col">
+                        <input class="form-control" name="lname" type="text" maxlength="30" aria-required="true" placeholder="Last Name"/>                    
+                    </div>
+                </div>
+
+                <div class="form-outline mb-4">    
+                    <legend>
+                        Parent's Email Address
+                        <span class="required" aria-hidden="true">*</span>
+                    </legend>                                  
+                    <input class="form-control" name="email" type="email" aria-required="true" placeholder="Email Address"/>
+                </div>
+                
+                <div form-outline mb-4>
+                    <legend class="title">
+                        Address
+                        <span class="required" aria-hidden="true">*</span>
+                    </legend>
+                  
+                    <div class="form-group mb-2">
+                        <input class="form-control" name="address" id="address1" type="text" aria-required="true" placeholder="Address 1"/>
+                    </div>
+                    <div class="form-group mb-2">
+                        <input class="form-control" name="address2" id="address2" type="text" aria-required="true" placeholder="Address 2"/>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <div class="col-md-6">
+                            <input class="form-control" name="city" id="city" type="text" aria-required="true" placeholder="City"/>
+                        </div>
+                        <div class="col-md-4">
+                            <select id="statename" name="state" class="form-control">
+                                <option selected>CA</option>
+                                <option >NV</option>
+                                <option >AZ</option>
+                                <option >OR</option>
+                            </select>                                                        
+                        </div>
+                        <div class="col-md-2" >    
+                            <input class="form-control" name="zipcode" id="zipcode" type="text" aria-required="true" placeholder="Zip"/>
+                        </div>
+                    </div>
+                </div> 
+
+
+
+                
+                
+                <fieldset class="form-outline row mb-4">
+                    <legend class="title">
+                        Cell Phone
+                        <span class="required" aria-hidden="true">*</span>                  
+                    </legend>                    
+                    <div class="col-md-2">
+                        <label class="caption">
+                            <input class="form-control" type="text" maxlength="3" aria-required="true" />
+                            <span class="caption-text">(###)</span>
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="caption">
+                            <input class="form-control" type="text" maxlength="3" aria-required="true" />
+                            <span class="caption-text">###</span>
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="caption">
+                            <input class="form-control" type="text" maxlength="4" aria-required="true" />
+                            <span class="caption-text">####</span>
+                          </label>
+                    </div>
+                </fieldset>
+                
+                <fieldset class="form-outline row mb-4">
+                    <legend class="title">
+                        Phone #2
+                    </legend>
+                    <div class="col-md-2">
+                        <label class="caption">
+                            <input class="form-control" type="text" maxlength="3"/>
+                            <span class="caption-text">(###)</span>
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="caption">
+                            <input class="form-control" type="text" maxlength="3"/>
+                            <span class="caption-text">###</span>
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="caption">
+                            <input class="form-control" type="text" maxlength="4" />
+                            <span class="caption-text">####</span>
+                        </label>
+                    </div>
+                </fieldset>
+                
+                <fieldset class="form-outline row mb-4">                    
+                    <legend class="title">
+                        Student Date of Birth
+                        <span class="required" aria-hidden="true">*</span>
+                    </legend>     
+                    <div class="col-md-2"
+                        <label class="caption">
+                            <input class="form-control" type="text" maxlength="2" />
+                            <span class="caption-text">MM</span>
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="caption">
+                            <input class="form-control" type="text" maxlength="2" />
+                            <span class="caption-text">DD</span>
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="caption">
+                            <input class="form-control" type="text" maxlength="4" />
+                            <span class="caption-text">YYYY</span>
+                        </label>
+                    </div>
+                </fieldset>
+                
+                <div class="form-outline row mb-4 col-md-2">
+                    <legend class="title">
+                        Student Age
+                        <span class="required" aria-hidden="true">*</span>
+                    </legend>
+                    <dev class="col-md-2>">
+                        <input class="form-control" type="text" aria-required="true" maxlength=3 />
+                    </dev>
+                </div>
+                
+                <fieldset class="form-outline row mb-4">
+                    <legend class="title">
+                        Gender
+                        <span class="required" aria-hidden="true">*</span>  
+                    </legend>
+                    <div><label class="form-check-label"><input class="form-check-input" type="checkbox" name="154748-field" value="Boy"/> Boy</label></div> 
+                    <div><label class="form-check-label"><input class="form-check-input" type="checkbox" name="154748-field" value="Girl"/> Girl</label></div>
+                    <div><label class="form-check-label"><input class="form-check-input" type="checkbox" name="154748-field" value="Other"/> Other</label></div>
+                </fieldset>
+  
+                <fieldset class="form-outline row mb-4">
+                    <legend class="title">
+                        How Did You Hear About Pacific Dance?
+                        <span class="required" aria-hidden="true">*</span>
+                    </legend>              
+                    <div><label class="form-check-label"><input class="form-check-input" type="checkbox" name="17529-field" value="Friend"/> Friend</label></div>
+                    <div><label class="form-check-label"><input class="form-check-input" type="checkbox" name="17529-field" value="Google"/> Google</label></div>                
+                    <div><label class="form-check-label"><input class="form-check-input" type="checkbox" name="17529-field" value="Walk By"/> Walk By</label></div>            
+                    <div><label class="form-check-label"><input class="form-check-input" type="checkbox" name="17529-field" value="Internet"/> Internet</label></div>                    
+                    <div><label class="form-check-label"><input class="form-check-input" type="checkbox" name="17529-field" value="Mom's Group"/> Mom's Group</label></div>                    
+                    <div><label class="form-check-label"><input class="form-check-input" type="checkbox" name="17529-field" value="Facebook"/> Facebook</label></div>                    
+                    <div><label class="form-check-label"><input class="form-check-input" type="checkbox" name="17529-field" value="Instagram"/> Instagram</label></div>                    
+                    <div><label class="form-check-label"><input class="form-check-input" type="checkbox" name="17529-field" value="YouTube"/> YouTube</label></div>                    
+                    <div><label class="form-check-label"><input class="form-check-input" type="checkbox" name="17529-field" value="Yelp"/> Yelp</label></div>                    
+                    <div><label class="form-check-label"><input class="form-check-input" type="checkbox" name="17529-field" value="Other"/> Other</label></div>                    
+                </fieldset>
+                
+                <div class="form-outline row mb-4"> 
+                    <legend class="title">
+                        Classes
+                    </legend>
+                    <div>What Classes Are You Interested In?</div>
+                    <input class="form-control" type="text" aria-required="true" />
+                </div>
+
+                <fieldset class="form-outline row mb-4">
+                    <legend class="title">
+                        School Policies
+                        <span class="required" aria-hidden="true">*</span>                  
+                    </legend>              
+
+                    <div>
+    <legend class="form-outline">REGISTRATION</legend>
+    <div class="form-group col">
+    A Registration Form & Waiver must be completed and submitted by a parent or legal guardian before any class is taken.
+    
+    <p><p>There is a $20 registration fee. If you discontinue classes for any reason for more than one month, and then return, you will be required to pay the registration fee upon re-enrolling.
+    </div>
+
+    <legend class="form-outline">TUITION</legend>
+    <div class="form-group col">
+    Tuition for classes is a monthly tuition (regardless of the number of weeks or holidays in any month). Please see Holidays Closed on our website.
+    
+    <p><p>Tuition is paid in advance and is due on the 1st day of each month.  We accept credit card payments and offer a recurring payment option.  If your first class falls on a holiday or you are absent, you may pay online or mail your tuition payment to Pacific Dance, BUT it must be postmarked before the 7th day of the month in order to avoid a $15 late fee. 
+    
+    <p><p>NO statements will be mailed to you unless your tuition is late.
+    
+    <p><p>A $15 late fee will be charged for all tuition payments received after the 7th day of the month (including payments mailed and postdated after the 7th day of the month). 
+    
+    <p><p>A $35 fee will be charged on all returned checks.
+    
+    <p><p>NO credit or refund is given for absences, tuition, costumes, competition fees or convention fees.
+    
+    <p><p>If you are dropping classes, you must notify us via e-mail by the 20th day of the preceding month, or you will be responsible to pay your tuition for the following month.
+    
+    <p><p>We offer a recurring credit card charge to be charged on the 1st day of each month.  You must notify us via e-mail by the 20th of the month preceding the month you would like to drop, so we can deactivate your recurring charge.
+    </div>
+    
+    <legend class="form-outline">ABSENCES</legend>
+    <div class="form-group col">
+    If you are absent from a class, you may use a courtesy make-up in a comparable class.  A make-up must be taken no later than one month from the date of the absence, and you must be currently registered in a class.  Make-ups are non-transferrable. Pacific Dance has the right to refuse the use of a make-up should the class size be too large on the day of a make-up, or if the level/age is not appropriate for the student (refer to Class Schedules page on our website for a list of classes closed or with limited make-ups).
+    
+    <p><p>If you are taking a make-up class in a 90 minute class and are not enrolled in a 90 minute class, you will need to use two make-ups to take a make-up in a 90 minute class.
+    </div>
+
+    <legend class="form-outline">ATTIRE</legend>
+    <div class="form-group col">
+    Proper dancewear and shoes are required for all classes (please see the Dance Attire page on our website for details).
+    <p>
+    </div>
+
+    <legend class="form-outline">RECITAL</legend>
+    <div class="form-group col">
+    Our annual Recital is optional.  If you decide to participate in the Recital, you are required to have good attendance in your class(es), purchase the assigned costume(s), tights and shoes, and attend mandatory rehearsals and all scheduled recital performances.
+    
+    <p><p>If your account balance is not paid in full prior to the Mandatory Dress Rehearsal date for the Recital, your child will not be able to participate in the Recital.
+    </div>
+
+    <legend class="form-outline">SUPERVISION OF STUDENT</legend>
+    <div class="form-group col">
+    Children are supervised during class time only and should not be dropped off early or picked up late.
+    <p>
+    </div>
+
+    <legend class="form-outline">PHOTOGRAPHY AND VIDEOTAPING</legend>
+    <div class="form-group col">
+    Unless prior parental and teacher authorization has been given, no photography or videotaping is allowed at Pacific Dance of any student other than your own.
+    <p>
+    </div>
+
+    <p><p>In order to maintain the quality level of dance training at Pacific Dance, classes run year-round.  Very often our classes are full, so space may be limited.   If you drop your class(es), your space in that class cannot be held.  If you have any questions, please feel free to speak with us.
+    
+    <legend class="form-outline">MISCELLANEOUS</legend>
+    <div class="form-group col">
+    Despite our safety precautions, there is a risk of contagion in any public place.  By returning to the studio, you are acknowledging that you understand these risks and do not hold Pacific Dance or employees liable.  
+    </div>
+    <p><p>Due to the uncertainty of the pandemic, the studio could be closed by the State of California, County of Orange or City of Irvine at any time for safety.   In this case, there are no tuition refunds or cancellations and all students can participate via our zoom class option. 
+                    </div>
+                    <div>
+                        I acknowledge I have read School Policies, and agree to all policies listed. I am 18 years old or older.
+                        <p>
+                        <div><label class="form-check-label"><input class="form-check-input" type="checkbox" name="27816-field" value="I agree - I am 18 years old or older."/> I agree - I am 18 years old or older.</label></div>
+                    </div>                    
+
+                </fieldset>
+
+                <fieldset>
+                    <legend class="title">
+                          WAIVER AND RELEASE FROM LIABILITY FOR DANCE INSTRUCTION
+                        <span class="required" aria-hidden="true">*</span>                  
+                    </legend>
+              
+                    <div class="form-outline row mb-4">
+                        I have chosen to have my child participate in dance instruction given by Pacific Dance, Inc. (“Pacific Dance”). I acknowledge that I understand the nature of the activities my child will be participating in and that my child is in the proper physical condition and capable of participating in the related activities, understanding that Pacific Dance is not in any way responsible for making such a determination. In consideration of my child’s enrollment in any dance instruction program, I understand and agree on behalf of myself and my child, to release, hold harmless, and discharge Pacific Dance from all claims, costs, liabilities, expenses or judgments, including attorneys’ fees and court costs for any occurrences in connection with any dance instruction. I assume all risks to my child in connection with any instruction and further release Pacific Dance and its owners and employees from liability for any injury sustained by my child while he or she is enrolled in any dance instruction program, including all risks reasonably connected with such activity whether foreseen or unforeseen. I understand that despite precautions and policies put in place by Pacific Dance, there is a risk of any contagion, including Covid-19, to my minor child or myself. Participation is voluntary with knowledge of this risk. By executing this Waiver, you hereby release Pacific Dance from any and all liability and responsibility that may arise from any infection by, or exposure or suspected exposure to, the Coronavirus in connection with dance classes. I understand that Pacific Dance is not responsible for my child or other children under my supervision who are left unsupervised in the common areas and areas surrounding the dance studio and that Pacific Dance will only be supervising my child when he or she is participating in scheduled dance activities, programs or instruction. I understand that Pacific Dance is not responsible for personal property that is lost, damaged or stolen while I or my child is at or on Pacific Dance property. I acknowledge and agree that it is my responsibility to maintain my own accident and health insurance coverage that provides adequate coverage for myself and my child participating in Pacific Dance activities and that Pacific Dance does not provide accident or health insurance for those participating in its instruction, activities or programs. I authorize and agree that Pacific Dance may take and use photographs, videos or likenesses of myself or my child as needed for its record-keeping, advertising and/or public relations projects and that I have no rights to the same and will not be compensated for the same. By clicking the "I Agree" box I agree to execute a complete and unconditional waiver and release of all liability pursuant to the terms herein, and agreement as to all terms and conditions contained above. I am of lawful age and competent to execute this affirmation. I HAVE FULLY INFORMED MYSELF AS TO THE CONTENTS OF THIS RELEASE AND HAVE READ THE SAME PRIOR TO AGREEMENT OF TERMS.
+                        <p>
+                        <div><label class="form-check-label"><input class="form-check-input" type="checkbox" name="48799-field" value="I agree - I am 18 years old or older."/> I agree - I am 18 years old or older.</label></div>
+                    </div>                    
+                </fieldset>    
+            </div>
+            <div class="form-outline">
+                <input class="btn btn-primary mb-2" type="submit" value="Submit"/>
+            </div>
+        </form>
+    </div>
+
+<%- include('includes/end.ejs') %>
