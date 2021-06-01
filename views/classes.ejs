@@ -37,15 +37,15 @@
       <h1 class="text-center"> Select New Classes</h1>
 
     <div class="container" id="myInput">
-      <div>
-        <select class="selectpicker" ng-model="Level" data-style="btn-primary" show-tick>
+      <div class="d-flex justify-content-around">
+        <select class="selectpicker p-2" ng-model="Level" data-style="btn-primary" show-tick>
           <option value="">Select Level</option>
           <option value="BEG">Intro</option>
           <option value="INT">Intermediate</option>
           <option value="II">Advanced</option>
         </select>
       
-        <select class="selectpicker" ng-model="Style" data-style="btn-primary" show-tick>
+        <select class="selectpicker p-2" ng-model="Style" data-style="btn-primary" show-tick>
           <option value="">Select Style</option>
           <option value="Jazz">Jazz</option>
           <option value="Ballet">Ballet</option>
@@ -54,7 +54,7 @@
           <option value="Tap">Tap</option>
         </select>
       
-        <select class="selectpicker" ng-model="AgeRange" data-style="btn-primary" show-tick>
+        <select class="selectpicker p-2" ng-model="AgeRange" data-style="btn-primary" show-tick>
           <option value="">Select Age Range</option>
           <option value="6+">6+</option>
           <option value="7+">7+</option>
@@ -63,7 +63,7 @@
           <option value="Adult">Adult</option>
         </select>
       
-        <select class="selectpicker" ng-model="DayOfWeek" data-style="btn-primary" show-tick>
+        <select class="selectpicker p-2" ng-model="DayOfWeek" data-style="btn-primary" show-tick>
           <option value="">Select Day</option>
           <option value="Monday">Mondays</option>
           <option value="Tuesday">Tuesdays</option>
@@ -76,6 +76,8 @@
       </div>
     </div>
 
+    <form id="nextPageForm" action="/registration" method="get">
+    
     <table class="table" id="myTable">
         <thead class="thead-dark">
           <tr>
@@ -98,11 +100,12 @@
             <td>{{p.AgeRange}}</td>
             <td>{{p.Styles}}</td>
             <td>{{p.Instructor}}</td>
-            <td><button type="button" class="btn btn-secondary">Add Class</button></td>
+            <td><button type="button" class="btn btn-secondary" form="nextPageForm">Add Class</button></td>
           </tr>
         </tbody>
         
       </table>
+    </form>
   </div>
 
   
