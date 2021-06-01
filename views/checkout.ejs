@@ -1,0 +1,49 @@
+<%- include('includes/head.ejs') %>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.js"></script>
+    <script>
+    var app = angular.module("exampleApp", []);
+    app.controller('defaultCtrl', function ($scope) {
+        $scope.DaysArray = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        $scope.products = [
+            {"ClassID":"713","StartTime":"04:30","EndTime":"05:30","ClassName":"IS INT ACRO JAZZ","Level":"","AgeRange":"7+","Styles":"Acro","Instructor":"Kyle Walker","StudioNumber":"3","DayOfWeek":"Thursday","LengthOfClass":"0","MaximumEnroll":"20","CurrentlyEnrolled":"15"},
+            {"ClassID":"492","StartTime":"03:30","EndTime":"04:30","ClassName":"ZM BEG ACRO JAZZ 7+","Level":"","AgeRange":"7+","Styles":"Acro","Instructor":"Kyle Walker","StudioNumber":"2","DayOfWeek":"Monday","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"2"},
+            {"ClassID":"708","StartTime":"04:30","EndTime":"05:30","ClassName":"IS BEG ACRO JAZZ 7+","Level":"","AgeRange":"7+","Styles":"Acro","Instructor":"Kyle Walker","StudioNumber":"3","DayOfWeek":"Tuesday","LengthOfClass":"0","MaximumEnroll":"20","CurrentlyEnrolled":"20"},   
+        ];
+    console.log("Here in controller");
+    });
+    </script>
+</head>
+
+<body ng-app="exampleApp">
+    <%-include('includes/navigation.ejs') %>
+
+    <div  class="flex-shrink-0 col-sm-12  mx-12 container" ng-controller="defaultCtrl">
+        <div>
+            <h1 class="text-center"> Selected Classes:</h1>
+        </div>
+
+        <table class="table" id="myTable">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Class Name</th>
+                <th scope="col">Day</th>
+                <th scope="col">Time</th>
+                <th scope="col">Instructor</th>
+                <th scope="col"> </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="p in products">
+                <td>{{p.ClassName}}</td>
+                <td>{{p.DayOfWeek}}</td>
+                <td>{{p.StartTime}}</td>
+                <td>{{p.Instructor}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        <button type="button" class="btn btn-secondary">Finalize Sign-up</button>
+
+    </div>
+
+<%- include('includes/end.ejs') %>        
