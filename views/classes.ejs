@@ -35,7 +35,10 @@
 
         console.log($scope.classes)
         
-}
+} 
+      $scope.buttonClick = function() {
+        console.log("Button clicked");
+      }
     }); 
   </script>
 
@@ -49,8 +52,8 @@
 
    <!-- <div class="container" id="myInput"> -->
       <div class="dropdown" id="myInput">
- 
-        <select class="btn btn-primary selectpicker dropdown-toggle" ng-model="Level" data-style="btn-primary" show-tick>
+        <form id="nextPageForm" action="/registration" method="get">
+        <select class="btn  btn-primary selectpicker dropdown-toggle p-2" ng-model="Level" data-style="btn-primary" show-tick>
           <option class="dropdown-item" value="">Select Level</option>
           <option class="dropdown-item"value="BEG">Intro</option>
           <option class="dropdown-item"value="INT">Intermediate</option>
@@ -58,7 +61,7 @@
         </select>
     
       
-        <select class="btn btn-primary selectpicker dropdown-toggle" ng-model="Style" data-style="btn-primary" show-tick>
+        <select class="btn btn-primary selectpicker dropdown-toggle p-2" ng-model="Style" data-style="btn-primary" show-tick>
           <option class="dropdown-item" value="">Select Style</option>
           <option class="dropdown-item" value="Jazz">Jazz</option>
           <option class="dropdown-item" value="Ballet">Ballet</option>
@@ -67,7 +70,7 @@
           <option class="dropdown-item" value="Tap">Tap</option>
         </select>
       
-        <select class="btn btn-primary selectpicker dropdown-toggle" ng-model="AgeRange" data-style="btn-primary" show-tick>
+        <select class="btn btn-primary selectpicker dropdown-toggle p-2" ng-model="AgeRange" data-style="btn-primary" show-tick>
           <option class="dropdown-item" value="">Select Age Range</option>
           <option class="dropdown-item" value="6+">6+</option>
           <option class="dropdown-item" value="7+">7+</option>
@@ -76,7 +79,7 @@
           <option class="dropdown-item" value="Adult">Adult</option>
         </select>
       
-        <select class="btn btn-primary selectpicker dropdown-toggle" ng-model="DayOfWeek" data-style="btn-primary" show-tick>
+        <select class="btn btn-primary selectpicker dropdown-toggle p-2" ng-model="DayOfWeek" data-style="btn-primary" show-tick>
           <option class="dropdown-item" value="">Select Day</option>
           <option class="dropdown-item" value="Monday">Mondays</option>
           <option class="dropdown-item" value="Tuesday">Tuesdays</option>
@@ -87,10 +90,12 @@
           <option class="dropdown-item" value="Sunday">Sundays</option>
         </select>
 
-        <button type="button" class="px-3 btn btn-primary float-end" ng-click="">Proceed to Registration ({{classes.length}})</button>
+        <button type="submit" class="px-3 btn btn-primary float-end">Proceed to Registration ({{classes.length}})</button>
       </div>
     <!-- </div> -->
 
+    
+    
     <table class="table" id="myTable">
         <thead class="thead-dark">
           <tr>
@@ -119,9 +124,10 @@
         
       </table>
       <div>
-        <button type="button" class="btn btn-primary" ng-click="">Proceed to Registration ({{classes.length}})</button>
+        <button type="submit" class="btn btn-primary" >Proceed to Registration ({{classes.length}})</button>
       </div>
 
+    </form>
   </div>
 
   

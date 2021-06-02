@@ -5,16 +5,12 @@ const passport   = require('passport');
 const isAuth = require('../middleware/is-auth');
 
 router.get('/', isAuth, function(req, res) {
-    console.log("classes");
-    res.render('classes', {
+    console.log("confirmation");
+    res.render('confirmation', {
         admin: req.session.isAdmin,
-        pageTitle: 'Classes',
+        pageTitle: 'Confirmation',
         isLoggedIn: req.session.isLoggedIn
     });
-});
-router.get('/registration', isAuth, function(req, res) {
-    console.log("classes post");
-    res.redirect('/registration');
 });
 
 module.exports = router;

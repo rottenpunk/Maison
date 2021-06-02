@@ -15,7 +15,11 @@ const login      = require("./routes/login");
 const logout     = require("./routes/logout");
 const welcome    = require("./routes/welcome");
 const passport   = require('passport');
-const classes   = require('./routes/classes');
+const classes    = require('./routes/classes');
+const registration = require('./routes/registration');
+const checkout   = require('./routes/checkout');
+const converge   = require('./routes/converge');
+const confirmation = require('./routes/confirmation');
 require("./config/passport");
 
 var app = express();
@@ -76,10 +80,15 @@ app.use("/login", login);
 app.use("/welcome", welcome);
 app.use("/logout", logout);
 app.use("/classes", classes);
+app.use("/registration", registration);
+app.use("/checkout", checkout);
+app.use("/converge", converge);
+app.use("/confirmation", confirmation);
 
+app.use("/public", express.static("public"));       // Serve up static files from public.
 
 // Last route...
-// app.use(errorController.get404);
+//app.use(errorController.get404);
 
 http.createServer(app).listen(port, () => {
   console.log('Server is up on port ' + port);
