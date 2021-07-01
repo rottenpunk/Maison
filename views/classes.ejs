@@ -1,43 +1,90 @@
 <%- include('includes/head.ejs') %>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.js"></script>
   <script>
+    
     var app = angular.module("exampleApp", []);
-    app.controller('defaultCtrl', function ($scope) {
+    app.controller('defaultCtrl', function ($scope, $http, $window) {
       $scope.DaysArray = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-      $scope.products = [
-        {"ClassID":"713","StartTime":"04:30","EndTime":"05:30","ClassName":"IS INT ACRO JAZZ","Level":"","AgeRange":"7+","Styles":"Acro","Instructor":"Kyle Walker","StudioNumber":"3","DayOfWeek":"Thursday","LengthOfClass":"0","MaximumEnroll":"20","CurrentlyEnrolled":"15"},
-        {"ClassID":"492","StartTime":"03:30","EndTime":"04:30","ClassName":"ZM BEG ACRO JAZZ 7+","Level":"","AgeRange":"7+","Styles":"Acro","Instructor":"Kyle Walker","StudioNumber":"2","DayOfWeek":"Monday","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"2"},
-        {"ClassID":"708","StartTime":"04:30","EndTime":"05:30","ClassName":"IS BEG ACRO JAZZ 7+","Level":"","AgeRange":"7+","Styles":"Acro","Instructor":"Kyle Walker","StudioNumber":"3","DayOfWeek":"Tuesday","LengthOfClass":"0","MaximumEnroll":"20","CurrentlyEnrolled":"20"},
-        {"ClassID":"480","StartTime":"05:30","EndTime":"06:30","ClassName":"ZM BEG ACRO JAZZ 7+","Level":"","AgeRange":"7+","Styles":"Acro","Instructor":"Danielle Daguman ","StudioNumber":"9","DayOfWeek":"Tuesday","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"6"},
-        {"ClassID":"74","StartTime":"05:30","EndTime":"06:30","ClassName":"ZM LYRICAL I 8+","Level":"","AgeRange":"8+","Styles":"Lyrical","Instructor":"Jennifer Beith","StudioNumber":"7","DayOfWeek":"Monday","LengthOfClass":"60","MaximumEnroll":"0","CurrentlyEnrolled":"5"},
-        {"ClassID":"163","StartTime":"03:30","EndTime":"04:30","ClassName":"ZM BALLET I 8+","Level":"","AgeRange":"8+","Styles":"Ballet","Instructor":"Lori Murphy","StudioNumber":"3","DayOfWeek":"Monday","LengthOfClass":"60","MaximumEnroll":"0","CurrentlyEnrolled":"4"},
-        {"ClassID":"467","StartTime":"03:30","EndTime":"04:30","ClassName":"ZM JAZ\/LYR I 8+","Level":"","AgeRange":"8+","Styles":"Jazz","Instructor":"Michelle Rizzuto Richey","StudioNumber":"2","DayOfWeek":"Wednesday","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"1"},
-        {"ClassID":"169","StartTime":"04:30","EndTime":"05:30","ClassName":"ZM JAZZ I 8+","Level":"","AgeRange":"8+","Styles":"Jazz","Instructor":"Brandi Freas-Cusick","StudioNumber":"3","DayOfWeek":"Monday","LengthOfClass":"60","MaximumEnroll":"0","CurrentlyEnrolled":"0"},
-        {"ClassID":"498","StartTime":"10:00","EndTime":"11:00","ClassName":"ZM BALLET I 8+","Level":"","AgeRange":"8+","Styles":"Ballet","Instructor":"Nicky Wagg","StudioNumber":"8","DayOfWeek":"Saturday","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"2"},
-        {"ClassID":"372","StartTime":"05:30","EndTime":"06:30","ClassName":"ZM HH BEG 10+","Level":"","AgeRange":"10+","Styles":"Hip Hop","Instructor":"Hank Schmidt","StudioNumber":"9","DayOfWeek":"Monday","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"3"},
-        {"ClassID":"801","StartTime":"04:30","EndTime":"05:30","ClassName":"IS K-POP 10+","Level":"","AgeRange":"10+","Styles":"K-Pop","Instructor":"Hannah Kon","StudioNumber":"2","DayOfWeek":"Friday","LengthOfClass":"0","MaximumEnroll":"30","CurrentlyEnrolled":"19"},
-        {"ClassID":"3","StartTime":"05:30","EndTime":"06:30","ClassName":"ZM BALLET I 10+AD","Level":"","AgeRange":"10+","Styles":"Ballet","Instructor":"Nicky Wagg","StudioNumber":"7","DayOfWeek":"Thursday","LengthOfClass":"60","MaximumEnroll":"0","CurrentlyEnrolled":"7"},
-        {"ClassID":"131","StartTime":"07:00","EndTime":"08:00","ClassName":"ZM BALLET I 10+","Level":"","AgeRange":"10+","Styles":"Ballet","Instructor":"Brandi Freas-Cusick","StudioNumber":"3","DayOfWeek":"Monday","LengthOfClass":"60","MaximumEnroll":"0","CurrentlyEnrolled":"2"},
-        {"ClassID":"71","StartTime":"06:30","EndTime":"07:30","ClassName":"ZM TAP I-B 10+","Level":"","AgeRange":"10+","Styles":"Tap","Instructor":"Jennifer Beith","StudioNumber":"7","DayOfWeek":"Monday","LengthOfClass":"60","MaximumEnroll":"0","CurrentlyEnrolled":"0"},
-        {"ClassID":"546","StartTime":"06:30","EndTime":"07:30","ClassName":"ZM K-POP 10+","Level":"","AgeRange":"10+","Styles":"K-Pop","Instructor":"Hank Schmidt","StudioNumber":"8","DayOfWeek":"Wednesday","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"8"},
-        {"ClassID":"481","StartTime":"06:30","EndTime":"07:30","ClassName":"ZM LYRICAL I 10+","Level":"","AgeRange":"10+","Styles":"Lyrical","Instructor":"Danielle Daguman ","StudioNumber":"9","DayOfWeek":"Tuesday","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"5"},
-        {"ClassID":"29","StartTime":"04:30","EndTime":"05:30","ClassName":"ZM TT II-B & UP 10+","Level":"","AgeRange":"10+","Styles":"Turns\/Tech","Instructor":"Bobby Amamizu","StudioNumber":"Monday","DayOfWeek":"Monday","LengthOfClass":"60","MaximumEnroll":"0","CurrentlyEnrolled":"2"},
-        {"ClassID":"247","StartTime":"06:30","EndTime":"07:30","ClassName":"ZM JAZZ II-B+ 10+","Level":"","AgeRange":"10+","Styles":"Jazz","Instructor":"Bobby Amamizu","StudioNumber":"1","DayOfWeek":"Monday","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"4"}
-      ];
+      $scope.cart = [];
+
+      // Simple GET request example:
+      $http({
+        method: 'GET',
+        url: 'https://pdw.pacificdance.net/PacificDanceWare/index.php/class_api'
+      }).then(function successCallback(response) {
+          // this callback will be called asynchronously
+          // when the response is available
+          console.log(response.data);
+          $scope.products = response.data;
+
+
+        }, function errorCallback(response) {
+            console.log("Error: " + response);
+        });
+
+       
+        
       console.log("Here in controller");
 
-      $scope.classes = [];
+      $scope.addClassToCart = function(p) {
+        if (p.Action === 'Added') {
+          // remove class from the cart 
+            var length = $scope.cart.length;
+            if (length === 1) {
+              $scope.cart = [];
+              length--;
+            }
+            for (var i = 0; i < length; i++) {
+              pdwClass = $scope.cart[i];
+              console.log(pdwClass);
+              if (parseInt(p.ClassID) === pdwClass && length>1) {
+                $scope.cart.splice(i,1);
+                break;
+              }
+            
+            }
+            console.log($scope.cart);
+            p.Action = 'Add Class';
+            $scope.sendCart();
+            return;
 
-      $scope.addClass = function(p) {
-        alert(p.ClassName + " added to cart!")
-  
-        $scope.classes.push({p});
+        }
+        p.Action = 'Added'
+       
+        /* trying to change the color of the button once pressed ugh
+        document.getElementById(addButton).classList.remove('btn-outline-secondary');
+        document.getElementById(addButton).classList.add('btn-secondary');
+        */
 
-        console.log($scope.classes)
-        
+
+        $scope.cart.push(parseInt(p.ClassID));
+        console.log($scope.cart)
+
+        // send the cart to the backend each time "Add Class" is pressed, 
+        $scope.sendCart();
+
+        //and then we will have to get the cart each time the page is loaded ?
 } 
-      $scope.buttonClick = function() {
-        console.log("Button clicked");
+      $scope.sendCart = function() {
+        console.log("button clicked");
+        $http({
+        method: 'POST',
+        url: '/classes/cart',
+        data: $scope.cart
+      }).then(function successCallback(response) {
+          // this callback will be called asynchronously
+          // when the response is available
+    
+          console.log("success callback");
+          
+          
+
+        }, function errorCallback(response) {
+            console.log("Error: " + response);
+        });
+      }
+      $scope.goToReg = function() {
+        $window.location.href="/registration";
       }
     }); 
   </script>
@@ -52,7 +99,7 @@
 
    <!-- <div class="container" id="myInput"> -->
       <div class="dropdown" id="myInput">
-        <form id="nextPageForm" action="/registration" method="get">
+        <form id="nextPageForm" >
         <select class="btn  btn-secondary selectpicker dropdown-toggle p-2" ng-model="Level" data-style="btn-primary" show-tick>
           <option class="dropdown-item" value="">Select Level</option>
           <option class="dropdown-item"value="BEG">Intro</option>
@@ -81,16 +128,16 @@
       
         <select class="btn btn-secondary selectpicker dropdown-toggle p-2" ng-model="DayOfWeek" data-style="btn-primary" show-tick>
           <option class="dropdown-item" value="">Select Day</option>
-          <option class="dropdown-item" value="Monday">Mondays</option>
-          <option class="dropdown-item" value="Tuesday">Tuesdays</option>
-          <option class="dropdown-item" value="Wednesday">Wednesdays</option>
-          <option class="dropdown-item" value="Thursday">Thursdays</option>
-          <option class="dropdown-item" value="Friday">Fridays</option>
-          <option class="dropdown-item" value="Saturday">Saturdays</option>
-          <option class="dropdown-item" value="Sunday">Sundays</option>
+          <option class="dropdown-item" value="Monday">Monday</option>
+          <option class="dropdown-item" value="Tuesday">Tuesday</option>
+          <option class="dropdown-item" value="Wednesday">Wednesday</option>
+          <option class="dropdown-item" value="Thursday">Thursday</option>
+          <option class="dropdown-item" value="Friday">Friday</option>
+          <option class="dropdown-item" value="Saturday">Saturday</option>
+          <option class="dropdown-item" value="Sunday">Sunday</option>
         </select>
 
-        <button type="submit" class="px-3 mx-5 btn btn-primary float-end">Proceed to Registration ({{classes.length}})</button>
+        <button ng-click="goToReg()" type="submit" class="px-3 mx-5 btn btn-primary float-end">Proceed to Registration ({{cart.length}})</button>
       </div>
     <!-- </div> -->
 
@@ -109,23 +156,28 @@
             <th scope="col"> </th>
           </tr>
         </thead>
+
+        <!-- Table with classes fetched from API 
+             TODO: DayOfWeek filter doesn't work, 
+             do we need to change the backend? 
+          -->
         <tbody>
           <tr ng-repeat="p in products | filter:AgeRange | filter:Style | filter:Level |filter:DayOfWeek">
             <td>{{p.ClassName}}</td>
-            <td>{{p.DayOfWeek}}</td>
+            <td>{{DaysArray[p.DayOfWeek-1]}}</td>
             <td>{{p.StartTime}}</td>
             <td>{{p.Level}}</td>
             <td>{{p.AgeRange}}</td>
             <td>{{p.Styles}}</td>
             <td>{{p.Instructor}}</td>
-            <td><button type="button" class="btn btn-outline-secondary" ng-click="addClass(p)">Add Class</button></td>
+            <td><button type="button" id="addButton" ng-init="!p.Action ? p.Action = 'Add Class' : p.Action " class="btn btn-outline-secondary" ng-click="addClassToCart(p)">{{p.Action}}</button></td>
           </tr>
         </tbody>
         
       </table>
-      <div>
+      <!--- <div>
         <button type="submit" class="btn btn-primary mb-4" >Proceed to Registration ({{classes.length}})</button>
-      </div>
+      </div> -->
 
     </form>
   </div>

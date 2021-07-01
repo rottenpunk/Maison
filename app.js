@@ -50,6 +50,7 @@ database
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
+app.use(bodyparser.json()); 
 app.use(bodyparser.urlencoded({ extended: false }));
 
 // Cross-site request forgery attack protection...

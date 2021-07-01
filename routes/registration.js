@@ -10,6 +10,7 @@ router.get('/', function(req, res) {
         pageTitle: 'Registration',
         isLoggedIn: req.session.isLoggedIn
     });
+    
 });
 
 module.exports = router;
