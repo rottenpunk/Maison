@@ -37,7 +37,7 @@ database
   })
   .catch(err => {
     console.error('Unable to connect to the database:', err);
-  });
+  }); 
 
 
 // Uncomment when we are ready to provide https:// support...
