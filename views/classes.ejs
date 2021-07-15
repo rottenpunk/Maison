@@ -164,7 +164,7 @@
         <tbody>
           <tr ng-repeat="p in products | filter:AgeRange | filter:Style | filter:Level |filter:DayOfWeek">
             <td>{{p.ClassName}}</td>
-            <td>{{DaysArray[p.DayOfWeek-1]}}</td>
+            <td>{{p.DayOfWeekName}}</td>
             <td>{{p.StartTime}}</td>
             <td>{{p.Level}}</td>
             <td>{{p.AgeRange}}</td>

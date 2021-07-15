@@ -1,5 +1,7 @@
 <%- include('includes/head.ejs') %>
+    <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.js"></script>
+
     <script>
     var app = angular.module("exampleApp", []);
     app.controller('defaultCtrl', function ($scope, $http) {
@@ -9,51 +11,70 @@
             {"ClassID":"492","StartTime":"03:30","EndTime":"04:30","ClassName":"ZM BEG ACRO JAZZ 7+","Level":"","AgeRange":"7+","Styles":"Acro","Instructor":"Kyle Walker","StudioNumber":"2","DayOfWeek":"Monday","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"2"},
             {"ClassID":"708","StartTime":"04:30","EndTime":"05:30","ClassName":"IS BEG ACRO JAZZ 7+","Level":"","AgeRange":"7+","Styles":"Acro","Instructor":"Kyle Walker","StudioNumber":"3","DayOfWeek":"Tuesday","LengthOfClass":"0","MaximumEnroll":"20","CurrentlyEnrolled":"20"},   
         ]; */
+
+      $scope.total = "";  
       $http({
         method: 'GET',
         url: '/classes/cart',
       }).then(function successCallback(response) {
         console.log(response.data);
         $scope.products = response.data;
+        $scope.updateTotal();
         }, function errorCallback(response) {
             console.log("Error: " + response);
         });
-      
+  
 
-    console.log("Here in controller");
-
+    //removes a class from the cart, updates the cart in the backend
     $scope.removeClass = function(p) {
-      $scope.cart = [];
-      var length = $scope.products.length;
-      if (length === 1) {
-          $scope.products = [];
-          length--;
+      //confirm user wants to remove the class
+      var deleteClass = window.confirm("Remove " + p.ClassName + "?");
+      if (deleteClass) {
+        $scope.cart = [];
+        var length = $scope.products.length;
+        if (length === 1) {
+            $scope.products = [];
+            $scope.total = "0.00";
+            length--;
+          }
+        for (var i = 0; i < length; i++) {
+          var pdwClass = $scope.products[i];
+          if (p.ClassID === pdwClass.ClassID && length>1) {
+            $scope.products.splice(i,1);
+            length--;
+            i--;
+            continue;
+          }
+          $scope.cart.push(parseInt(pdwClass.ClassID));
         }
-      for (var i = 0; i < length; i++) {
-        var pdwClass = $scope.products[i];
-        if (p.ClassID === pdwClass.ClassID && length>1) {
-          $scope.products.splice(i,1);
-          length--;
-          i--;
-          continue;
-        }
-        $scope.cart.push(parseInt(pdwClass.ClassID));
-      }
-      
-      $http({
-        method: 'POST',
-        url: '/classes/cart',
-        data: $scope.cart
-      }).then(function successCallback(response) {
-          // this callback will be called asynchronously
-          // when the response is available
-          console.log($scope.cart)
-          console.log("success callback");
-          //$window.location.href="/registration"
-          
+        //send new cart to backend
+        $http({
+          method: 'POST',
+          url: '/classes/cart',
+          data: $scope.cart
+        }).then(function successCallback(response) {
+            //updates the total tuition
+            $scope.updateTotal();
+            
 
-        }, function errorCallback(response) {
-            console.log("Error: " + response);
+          }, function errorCallback(response) {
+              console.log("Error: " + response);
+          });
+          //returns if user does not want to remove class
+        } else {
+          return;
+        }
+      }
+      //updates total by sending cart to PDW backend
+      $scope.updateTotal = function() {
+      $http({
+          method: 'POST',
+          url: '/checkout'
+        }).then(function successCallback(response){
+          console.log(response);
+          $scope.total = "$" + response.data.Tuition;
+        }).then(function errorCallback(response){
+          console.log("Error: " + response);
         });
       }
     });
@@ -66,11 +87,11 @@
 <body ng-app="exampleApp">
     <%-include('includes/navigation.ejs') %>
 
-    <div  class="flex-shrink-0 col-sm-12  mx-12 container" ng-controller="defaultCtrl">
+    <div  class="flex-shrink-0 col-sm-12 mx-12 container" ng-controller="defaultCtrl">
         <div>
             <h1 class="text-center"> Selected Classes:</h1>
         </div>
-        <form method="get" action="/converge">
+        <form method="POST" action="/checkout">
         <table class="table" id="myTable">
             <thead class="thead-dark">
               <tr>
@@ -84,15 +105,26 @@
             <tbody>
               <tr ng-repeat="p in products">
                 <td>{{p.ClassName}}</td>
-                <td>{{p.DayOfWeek}}</td>
+                <td>{{p.DayOfWeekName}}</td>
                 <td>{{p.StartTime}}</td>
                 <td>{{p.Instructor}}</td>
                 <td><button type="button" id="addButton" ng-init="p.Action = 'Remove Class'" class="btn btn-outline-secondary" ng-click="removeClass(p)">{{p.Action}}</button></td>
               </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><h6>Total : {{total}} </h6></td>
+                
+            </tr>
+        
             </tbody>
           </table>
-
-        <button type="submit"  class="btn btn-primary">Finalize Sign-up</button>
+          
+             <button type="submit" class="btn btn-primary">Finalize Sign-up</button>
+            
+    
         </form>
     </div>
 

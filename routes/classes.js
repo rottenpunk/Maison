@@ -4,6 +4,7 @@ const User = require('../models/user');
 const isAuth = require('../middleware/is-auth');
 const http = require('https')
 const fetch = require('node-fetch');
+const config = require('../config/config');
 
 router.get('/', function(req, res) {
     console.log("classes");
@@ -34,7 +35,7 @@ router.post('/cart', function(req, res) {
 
 router.get('/cart', function(req, res) {
     var cart = req.session.cart;
-    fetch('https://pdw.pacificdance.net/PacificDanceWare/index.php/class_api?ClassID=['+cart+']')
+    fetch(config.pdwURL + 'class_api?ClassID=['+cart+']')
     .then(res => res.json())
     .then(json => res.send(json));
 });

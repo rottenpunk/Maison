@@ -80,16 +80,16 @@
                  
                     <div class="col-md-4">
                         <label class="caption">
-                          <input class="form-control" name="tel1" type="tel" pattern="[0-9]{3}" placeholder="###" aria-label="3-digit area code" size="3" required/> 
+                          <input class="form-control" name="tel1" type="tel" pattern="[0-9]{3}" placeholder="###" aria-label="3-digit area code" size="3" maxlength="3" required/> 
                         </label>
                 
                     
                         <label class="caption">
-                            <input class="form-control" name="tel1" type="tel" pattern="[0-9]{3}" placeholder="###" aria-label="3-digit prefix" size="3" required/> 
+                            <input class="form-control" name="tel1" type="tel" pattern="[0-9]{3}" placeholder="###" aria-label="3-digit prefix" maxlength="3" size="3" required/> 
                         </label>
           
                         <label class="caption">
-                            <input class="form-control" name="tel1" type="tel" pattern="[0-9]{4}" placeholder="####" aria-label="4-digit number" size="4" required/>
+                            <input class="form-control" name="tel1" type="tel" pattern="[0-9]{4}" placeholder="####" aria-label="4-digit number" maxlength="4" size="4" required/>
                         </label>
                     </div>
                 </fieldset>
@@ -98,21 +98,21 @@
                 <fieldset class="form-outline row mb-4">                    
                     <legend class="title">
                        Secondary Phone
-                        <span class="required" aria-hidden="true">*</span>
+                    
                     </legend>  
                  
                     <div class="col-md-4">
                         <label class="caption">
-                          <input class="form-control" name="tel2" type="tel" pattern="[0-9]{3}" placeholder="###" aria-label="3-digit area code" size="3"/> 
+                          <input class="form-control" name="tel2" type="tel" pattern="[0-9]{3}" placeholder="###" aria-label="3-digit area code" maxlength="3" size="3"/> 
                         </label>
                 
                     
                         <label class="caption">
-                            <input class="form-control" name="tel2" type="tel" pattern="[0-9]{3}" placeholder="###" aria-label="3-digit prefix" size="3"/> 
+                            <input class="form-control" name="tel2" type="tel" pattern="[0-9]{3}" placeholder="###" aria-label="3-digit prefix" maxlength="3" size="3"/> 
                         </label>
           
                         <label class="caption">
-                            <input class="form-control" name="tel2" type="tel" pattern="[0-9]{4}" placeholder="####" aria-label="4-digit number" size="4"/>
+                            <input class="form-control" name="tel2" type="tel" pattern="[0-9]{4}" placeholder="####" aria-label="4-digit number" maxlength="4" size="4"/>
                         </label>
                     </div>
                 </fieldset>
@@ -155,9 +155,9 @@
                         Gender
                         <span class="required" aria-hidden="true">*</span>  
                     </legend>
-                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="154748-field" value="Boy" required/> Boy</label></div> 
-                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="154748-field" value="Girl"/> Girl</label></div>
-                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="154748-field" value="Other"/> Other</label></div>
+                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="gender" value="B" required/> Boy</label></div> 
+                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="gender" value="G"/> Girl</label></div>
+                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="gender" value="O"/> Other</label></div>
                 </fieldset>
   
                 <fieldset class="form-outline row mb-4">
@@ -165,16 +165,16 @@
                         How Did You Hear About Pacific Dance?
                         <span class="required" aria-hidden="true">*</span>
                     </legend>              
-                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="17529-field" value="Friend" required/> Friend</label></div>
-                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="17529-field" value="Google"/> Google</label></div>                
-                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="17529-field" value="Walk By"/> Walk By</label></div>            
-                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="17529-field" value="Internet"/> Internet</label></div>                    
-                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="17529-field" value="Mom's Group"/> Mom's Group</label></div>                    
-                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="17529-field" value="Facebook"/> Facebook</label></div>                    
-                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="17529-field" value="Instagram"/> Instagram</label></div>                    
-                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="17529-field" value="YouTube"/> YouTube</label></div>                    
-                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="17529-field" value="Yelp"/> Yelp</label></div>                    
-                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="17529-field" value="Other"/> Other</label></div>                    
+                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="Survey" value="Friend" required/> Friend</label></div>
+                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="Survey" value="Google"/> Google</label></div>                
+                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="Survey" value="Walk By"/> Walk By</label></div>            
+                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="Survey" value="Internet"/> Internet</label></div>                    
+                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="Survey" value="Mom's Group"/> Mom's Group</label></div>                    
+                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="Survey" value="Facebook"/> Facebook</label></div>                    
+                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="Survey" value="Instagram"/> Instagram</label></div>                    
+                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="Survey" value="YouTube"/> YouTube</label></div>                    
+                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="Survey" value="Yelp"/> Yelp</label></div>                    
+                    <div><label class="form-check-label"><input class="form-check-input" type="radio" name="Survey" value="Other"/> Other</label></div>                    
                 </fieldset>
                 
                 <div class="form-outline row mb-4"> 
@@ -182,7 +182,7 @@
                         Classes
                     </legend>
                     <div>What Classes Are You Interested In?</div>
-                    <input class="form-control" name="classes" type="text" aria-required="true" placeholder="ex. Jazz, Tap, Acro" />
+                    <input class="form-control" name="classes" type="text" aria-required="true" maxlength="30" placeholder="ex. Jazz, Tap, Acro" />
                 </div>
 
                 <fieldset class="form-outline row mb-4">
@@ -261,7 +261,7 @@
                     <div>
                         I acknowledge I have read School Policies, and agree to all policies listed. I am 18 years old or older.
                         <p>
-                        <div><label class="form-check-label"><input class="form-check-input" type="checkbox" name="27816-field" value="I agree - I am 18 years old or older." required /> I agree - I am 18 years old or older.</label></div>
+                        <div><label class="form-check-label"><input class="form-check-input" type="checkbox" name="AcknowledgedPolicies" value="X" required /> I agree - I am 18 years old or older.</label></div>
                     </div>                    
 
                 </fieldset>
@@ -272,10 +272,10 @@
                         <span class="required" aria-hidden="true">*</span>                  
                     </legend>
               
-                    <div class="form-outline row mb-4">
+                    <div class="form-outline col-mb-4">
                         I have chosen to have my child participate in dance instruction given by Pacific Dance, Inc. (“Pacific Dance”). I acknowledge that I understand the nature of the activities my child will be participating in and that my child is in the proper physical condition and capable of participating in the related activities, understanding that Pacific Dance is not in any way responsible for making such a determination. In consideration of my child’s enrollment in any dance instruction program, I understand and agree on behalf of myself and my child, to release, hold harmless, and discharge Pacific Dance from all claims, costs, liabilities, expenses or judgments, including attorneys’ fees and court costs for any occurrences in connection with any dance instruction. I assume all risks to my child in connection with any instruction and further release Pacific Dance and its owners and employees from liability for any injury sustained by my child while he or she is enrolled in any dance instruction program, including all risks reasonably connected with such activity whether foreseen or unforeseen. I understand that despite precautions and policies put in place by Pacific Dance, there is a risk of any contagion, including Covid-19, to my minor child or myself. Participation is voluntary with knowledge of this risk. By executing this Waiver, you hereby release Pacific Dance from any and all liability and responsibility that may arise from any infection by, or exposure or suspected exposure to, the Coronavirus in connection with dance classes. I understand that Pacific Dance is not responsible for my child or other children under my supervision who are left unsupervised in the common areas and areas surrounding the dance studio and that Pacific Dance will only be supervising my child when he or she is participating in scheduled dance activities, programs or instruction. I understand that Pacific Dance is not responsible for personal property that is lost, damaged or stolen while I or my child is at or on Pacific Dance property. I acknowledge and agree that it is my responsibility to maintain my own accident and health insurance coverage that provides adequate coverage for myself and my child participating in Pacific Dance activities and that Pacific Dance does not provide accident or health insurance for those participating in its instruction, activities or programs. I authorize and agree that Pacific Dance may take and use photographs, videos or likenesses of myself or my child as needed for its record-keeping, advertising and/or public relations projects and that I have no rights to the same and will not be compensated for the same. By clicking the "I Agree" box I agree to execute a complete and unconditional waiver and release of all liability pursuant to the terms herein, and agreement as to all terms and conditions contained above. I am of lawful age and competent to execute this affirmation. I HAVE FULLY INFORMED MYSELF AS TO THE CONTENTS OF THIS RELEASE AND HAVE READ THE SAME PRIOR TO AGREEMENT OF TERMS.
                         <p>
-                        <div><label class="form-check-label"><input class="form-check-input" type="checkbox" name="48799-field" value="I agree - I am 18 years old or older." required /> I agree - I am 18 years old or older.</label> 
+                        <div><label class="form-check-label mb-3"><input class="form-check-input" type="checkbox" name="AcknowledgedRelease" value="X" required /> I agree - I am 18 years old or older.</label> 
                         </div>
                        
                     </div>                    
