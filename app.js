@@ -20,6 +20,7 @@ const registration = require('./routes/registration');
 const checkout   = require('./routes/checkout');
 const converge   = require('./routes/converge');
 const confirmation = require('./routes/confirmation');
+const decline   = require('./routes/decline')
 require("./config/passport");
 
 var app = express();
@@ -85,6 +86,7 @@ app.use("/registration", registration);
 app.use("/checkout", checkout);
 app.use("/converge", converge);
 app.use("/confirmation", confirmation);
+app.use("/decline", decline);
 
 app.use("/public", express.static("public"));       // Serve up static files from public.
 

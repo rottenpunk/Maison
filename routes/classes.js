@@ -37,7 +37,11 @@ router.get('/cart', function(req, res) {
     var cart = req.session.cart;
     fetch(config.pdwURL + 'class_api?ClassID=['+cart+']')
     .then(res => res.json())
-    .then(json => res.send(json));
+    .then(json => res.send(json))
+    .catch(function(err) {
+        //add in feedback for user
+        console.log("Error in sending to pdw backend: " + err);
+    })
 });
 
 

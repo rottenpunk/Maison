@@ -1,10 +1,12 @@
 <%- include('includes/head.ejs') %>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.js"></script>
+  
   <script>
     
     var app = angular.module("exampleApp", []);
     app.controller('defaultCtrl', function ($scope, $http, $window) {
       $scope.DaysArray = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+      $scope.cartArray = [];
       $scope.cart = [];
 
       // Simple GET request example:
@@ -27,38 +29,41 @@
       console.log("Here in controller");
 
       $scope.addClassToCart = function(p) {
-        if (p.Action === 'Added') {
+        if (p.Action === 'Remove') {
+          
           // remove class from the cart 
-            var length = $scope.cart.length;
+            var length = $scope.cartArray.length;
             if (length === 1) {
+              $scope.cartArray = [];
               $scope.cart = [];
               length--;
             }
             for (var i = 0; i < length; i++) {
-              pdwClass = $scope.cart[i];
+              pdwClass = $scope.cartArray[i];
               console.log(pdwClass);
               if (parseInt(p.ClassID) === pdwClass && length>1) {
+                $scope.cartArray.splice(i,1);
                 $scope.cart.splice(i,1);
                 break;
               }
             
             }
-            console.log($scope.cart);
+            console.log($scope.cartArray);
             p.Action = 'Add Class';
             $scope.sendCart();
             return;
 
         }
-        p.Action = 'Added'
+        p.Action = 'Remove'
        
         /* trying to change the color of the button once pressed ugh
         document.getElementById(addButton).classList.remove('btn-outline-secondary');
         document.getElementById(addButton).classList.add('btn-secondary');
         */
 
-
-        $scope.cart.push(parseInt(p.ClassID));
-        console.log($scope.cart)
+        $scope.cart.push(p);
+        $scope.cartArray.push(parseInt(p.ClassID));
+        console.log($scope.cartArray)
 
         // send the cart to the backend each time "Add Class" is pressed, 
         $scope.sendCart();
@@ -70,7 +75,7 @@
         $http({
         method: 'POST',
         url: '/classes/cart',
-        data: $scope.cart
+        data: $scope.cartArray
       }).then(function successCallback(response) {
           // this callback will be called asynchronously
           // when the response is available
@@ -100,7 +105,7 @@
    <!-- <div class="container" id="myInput"> -->
       <div class="dropdown" id="myInput">
         <form id="nextPageForm" >
-        <select class="btn  btn-secondary selectpicker dropdown-toggle p-2" ng-model="Level" data-style="btn-primary" show-tick>
+        <select class="btn  btn-secondary selectpicker dropdown-toggle m-2 p-2" ng-model="Level" data-style="btn-primary" show-tick>
           <option class="dropdown-item" value="">Select Level</option>
           <option class="dropdown-item"value="BEG">Intro</option>
           <option class="dropdown-item"value="INT">Intermediate</option>
@@ -108,7 +113,7 @@
         </select>
     
       
-        <select class="btn btn-secondary selectpicker dropdown-toggle p-2" ng-model="Style" data-style="btn-primary" show-tick>
+        <select class="btn btn-secondary selectpicker dropdown-toggle m-2 p-2" ng-model="Style" data-style="btn-primary" show-tick>
           <option class="dropdown-item" value="">Select Style</option>
           <option class="dropdown-item" value="Jazz">Jazz</option>
           <option class="dropdown-item" value="Ballet">Ballet</option>
@@ -117,7 +122,7 @@
           <option class="dropdown-item" value="Tap">Tap</option>
         </select>
       
-        <select class="btn btn-secondary selectpicker dropdown-toggle p-2" ng-model="AgeRange" data-style="btn-primary" show-tick>
+        <select class="btn btn-secondary selectpicker dropdown-toggle m-2 p-2" ng-model="AgeRange" data-style="btn-primary" show-tick>
           <option class="dropdown-item" value="">Select Age Range</option>
           <option class="dropdown-item" value="6+">6+</option>
           <option class="dropdown-item" value="7+">7+</option>
@@ -126,7 +131,7 @@
           <option class="dropdown-item" value="Adult">Adult</option>
         </select>
       
-        <select class="btn btn-secondary selectpicker dropdown-toggle p-2" ng-model="DayOfWeek" data-style="btn-primary" show-tick>
+        <select class="btn btn-secondary selectpicker dropdown-toggle m-2 p-2" ng-model="DayOfWeek" data-style="btn-primary" show-tick>
           <option class="dropdown-item" value="">Select Day</option>
           <option class="dropdown-item" value="Monday">Monday</option>
           <option class="dropdown-item" value="Tuesday">Tuesday</option>
@@ -136,8 +141,43 @@
           <option class="dropdown-item" value="Saturday">Saturday</option>
           <option class="dropdown-item" value="Sunday">Sunday</option>
         </select>
-
-        <button ng-click="goToReg()" type="submit" class="px-3 mx-5 btn btn-primary float-end">Proceed to Registration ({{cart.length}})</button>
+        
+        <div class="mx-2 my-2 float-md-end">
+          <div class="btn-group dropleft" id="dropdownCart">
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+              <img src="./public/cart.svg" height="20" width="20" class="bi bi-cart"> {{cartArray.length}}
+            </button>
+            <div class="dropdown-menu bg-light" style="min-width: 40rem">
+              <table class="table" id="myTable">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Class Name</th>
+                    <th scope="col">Day</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Instructor</th>
+                    <th scope="col"> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="c in cart">
+                    <td>{{c.ClassName}}</td>
+                    <td>{{c.DayOfWeekName[0]+ c.DayOfWeekName[1]}}</td>
+                    <td>{{c.StartTime}}</td>
+                    <td>{{c.Instructor}}</td>
+                    <td><button type="button" ng-attr-id="{{c.ClassID}}" class="btn btn-outline-secondary" ng-click="addClassToCart(c)">{{c.Action}}</button></td>
+                  
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+        
+         
+          <button ng-click="goToReg()" type="submit" class="mx-3 btn btn-primary float-md-end">Proceed to Registration</button>
+        
+        </div>
+        
       </div>
     <!-- </div> -->
 
