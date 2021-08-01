@@ -74,9 +74,11 @@
           console.log(response);
           $scope.total = "$" + response.data.Tuition;
         }).then(function errorCallback(response){
-          console.log("Error: " + response);
+          console.log("checkout post error: " + response);
         });
       }
+
+      $scope.goToConverge
     });
     
    
@@ -91,7 +93,7 @@
         <div>
             <h1 class="text-center"> Selected Classes:</h1>
         </div>
-        <form method="POST" action="/checkout">
+        <form method="POST" action="/converge">
         <table class="table" id="myTable">
             <thead class="thead-dark">
               <tr>

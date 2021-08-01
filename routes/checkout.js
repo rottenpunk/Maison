@@ -43,6 +43,7 @@ router.post('/', function(req, res){
         .then(response => response.json())
         .then(jsonData => {
             console.log(jsonData);
+            req.session.Tuition = jsonData.Tuition;
             res.send(jsonData);
         })
         .catch(err => {

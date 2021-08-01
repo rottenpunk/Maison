@@ -106,7 +106,7 @@
       <div class="dropdown" id="myInput">
         <form id="nextPageForm" >
         <select class="btn  btn-secondary selectpicker dropdown-toggle m-2 p-2" ng-model="Level" data-style="btn-primary" show-tick>
-          <option class="dropdown-item" value="">Select Level</option>
+          <option class="dropdown-item" value="">All Levels</option>
           <option class="dropdown-item"value="BEG">Intro</option>
           <option class="dropdown-item"value="INT">Intermediate</option>
           <option class="dropdown-item"value="II">Advanced</option>
@@ -114,7 +114,7 @@
     
       
         <select class="btn btn-secondary selectpicker dropdown-toggle m-2 p-2" ng-model="Style" data-style="btn-primary" show-tick>
-          <option class="dropdown-item" value="">Select Style</option>
+          <option class="dropdown-item" value="">All Styles</option>
           <option class="dropdown-item" value="Jazz">Jazz</option>
           <option class="dropdown-item" value="Ballet">Ballet</option>
           <option class="dropdown-item" value="Hip Hop">Hip Hop</option>
@@ -123,7 +123,7 @@
         </select>
       
         <select class="btn btn-secondary selectpicker dropdown-toggle m-2 p-2" ng-model="AgeRange" data-style="btn-primary" show-tick>
-          <option class="dropdown-item" value="">Select Age Range</option>
+          <option class="dropdown-item" value="">All Age Ranges</option>
           <option class="dropdown-item" value="6+">6+</option>
           <option class="dropdown-item" value="7+">7+</option>
           <option class="dropdown-item" value="8+">8+</option>
@@ -132,7 +132,7 @@
         </select>
       
         <select class="btn btn-secondary selectpicker dropdown-toggle m-2 p-2" ng-model="DayOfWeek" data-style="btn-primary" show-tick>
-          <option class="dropdown-item" value="">Select Day</option>
+          <option class="dropdown-item" value="">All Days</option>
           <option class="dropdown-item" value="Monday">Monday</option>
           <option class="dropdown-item" value="Tuesday">Tuesday</option>
           <option class="dropdown-item" value="Wednesday">Wednesday</option>
@@ -202,14 +202,13 @@
              do we need to change the backend? 
           -->
         <tbody>
-          <tr ng-repeat="p in products | filter:AgeRange | filter:Style | filter:Level |filter:DayOfWeek">
+          <tr ng-repeat="p in products | filter:AgeRange | filter:Style | filter:Level |filter:DayOfWeek" ng-if="p.CurrentlyEnrolled != p.MaximumEnroll">
             <td>{{p.ClassName}}</td>
             <td>{{p.DayOfWeekName}}</td>
             <td>{{p.StartTime}}</td>
             <td>{{p.Level}}</td>
             <td>{{p.AgeRange}}</td>
             <td>{{p.Styles}}</td>
-            <td>{{p.Instructor}}</td>
             <td><button type="button" id="addButton" ng-init="!p.Action ? p.Action = 'Add Class' : p.Action " class="btn btn-outline-secondary" ng-click="addClassToCart(p)">{{p.Action}}</button></td>
           </tr>
         </tbody>

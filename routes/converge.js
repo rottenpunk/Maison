@@ -22,10 +22,22 @@ router.post('/', function(req, res) {
     var merchantPIN = "S3HJJ7K7RH0OTJLC0GD2MM71GTZMKQHGH1XX9LL7LOH0RLIDJI2NO898XH63Y1N8"; 
     var url = "https://api.demo.convergepay.com/hosted-payments/transaction_token";
     var hpurl = "https://api.demo.convergepay.com/hosted-payments"; 
-    var nextDate = "08/01/2021"
+    var ssl_customer_code = "N-" + req.session.regID;
+    var amount = req.session.Tuition;
+
+    console.log(ssl_customer_code);
+    var now = new Date();
+    if (now.getMonth() == 11) {
+        var nextMonth = new Date(now.getFullYear() + 1, 0, 1)
+    } else {
+        var nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1)
+    }
+
+    var nextDate = nextMonth.getMonth() + "/" + nextMonth.getDate() + "/" + nextMonth.getFullYear();
+    
     
 
-    var amount = "52.00";
+    
 
     data = 
         "ssl_merchant_id=" + merchantID +
@@ -36,9 +48,9 @@ router.post('/', function(req, res) {
         "&ssl_next_payment_date=" + nextDate +
         "&ssl_billing_cycle=MONTHLY" +
         "&ssl_end_of_month=N" +
-        "&ssl_customer_code=12345";
+        "&ssl_customer_code=" + ssl_customer_code;
 
-    
+        
 
     fetch(url, {
         method: 'POST',
@@ -49,10 +61,14 @@ router.post('/', function(req, res) {
          }
         })
         .then(function(response) { 
+            console.log(response.status);
             if(response.status === 200) {
                 response.text()
                 .then(function(token) {  
                     // redirect 
+                    console.log(token);
+                    token = encodeURIComponent(token);
+                    console.log(hpurl + "?ssl_txn_auth_token=" + token);
                     res.redirect(hpurl + "?ssl_txn_auth_token=" + token);
                 })
                 .catch(err => {
@@ -83,8 +99,7 @@ router.post('/success', function(req,res){
     res.send("Subscription success");
     console.log("success");
 
-    
-
+    console.log(req.body)
     //parse converge info
     
     console.log(req.body)
@@ -116,6 +131,7 @@ router.post('/success', function(req,res){
     }) 
     res.redirect('/confirmation');
 });
+
 
 
 module.exports = router;
