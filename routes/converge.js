@@ -22,24 +22,25 @@ router.post('/', function(req, res) {
     var merchantPIN = "S3HJJ7K7RH0OTJLC0GD2MM71GTZMKQHGH1XX9LL7LOH0RLIDJI2NO898XH63Y1N8"; 
     var url = "https://api.demo.convergepay.com/hosted-payments/transaction_token";
     var hpurl = "https://api.demo.convergepay.com/hosted-payments"; 
-    var ssl_customer_code = "N-" + req.session.regID;
+    var ssl_customer_code = "N-" + req.session.RegID;
     var amount = req.session.Tuition;
-
+    
     console.log(ssl_customer_code);
+    
     var now = new Date();
+    
     if (now.getMonth() == 11) {
         var nextMonth = new Date(now.getFullYear() + 1, 0, 1)
     } else {
         var nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1)
-    }
+        }
 
-    var nextDate = nextMonth.getMonth() + "/" + nextMonth.getDate() + "/" + nextMonth.getFullYear();
-    
-    
 
-    
+    nextMonth = nextMonth.toISOString();
+    var nextDate = nextMonth.substring(5,7) + "/" + nextMonth.substring(8,10) + "/" + nextMonth.substring(0,4);
 
-    data = 
+
+     data = 
         "ssl_merchant_id=" + merchantID +
         "&ssl_user_id=" + merchantUserID +
         "&ssl_pin=" + merchantPIN +
@@ -50,7 +51,6 @@ router.post('/', function(req, res) {
         "&ssl_end_of_month=N" +
         "&ssl_customer_code=" + ssl_customer_code;
 
-        
 
     fetch(url, {
         method: 'POST',

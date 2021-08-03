@@ -73,12 +73,13 @@
         }).then(function successCallback(response){
           console.log(response);
           $scope.total = "$" + response.data.Tuition;
+          //TODO: change to catch
         }).then(function errorCallback(response){
           console.log("checkout post error: " + response);
         });
       }
 
-      $scope.goToConverge
+      
     });
     
    
