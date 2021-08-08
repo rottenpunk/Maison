@@ -52,7 +52,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 app.use(bodyparser.json()); 
-app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.urlencoded({ extended: true }));
 
 // Cross-site request forgery attack protection...
 // app.use(csrfProtection);    // Can't use until we have options above.
@@ -93,7 +93,7 @@ app.use("/public", express.static("public"));       // Serve up static files fro
 // Last route...
 //app.use(errorController.get404);
 
-http.createServer(app).listen(port, () => {
+http.createServer(app).listen(port, () => {                                                                                                       
   console.log('Server is up on port ' + port);
 });
 

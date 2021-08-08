@@ -25,7 +25,7 @@ router.post('/', function(req, res) {
     var ssl_customer_code = "N-" + req.session.RegID;
     var amount = req.session.Tuition;
     
-    console.log(ssl_customer_code);
+    
     
     var now = new Date();
     
@@ -63,6 +63,7 @@ router.post('/', function(req, res) {
         .then(function(response) { 
             console.log(response.status);
             if(response.status === 200) {
+                
                 response.text()
                 .then(function(token) {  
                     // redirect 
@@ -83,30 +84,82 @@ router.post('/', function(req, res) {
 });
 
 router.post('/decline', function(req,res){
-    res.write("Subscription declined");
-    //endpoint where something has gone wrong
-    console.log("decline");
+    var user_info = {
+        "Source": "Maison",
+        "id": req.body.ssl_customer_code.slice(2),
+    }
+    
+    console.log(user_info)
+    user_info = JSON.stringify(user_info);
+
+    
+    //get HMAC header
+    var hmac = crypto.createHmac('sha256', config.pdw_secret)
+    //passing the data to be hashed
+    var data = hmac.update(user_info);
+    //creating the hmac in the required format
+    var hmac_data = data.digest('hex');
+
+    fetch(config.pdwURL + 'incoming_web_customer_api/v1_declined', {
+        method: 'POST',
+        body: user_info, 
+        headers: {
+            'Content-Type': 'application/json',
+            'HTTP_X_PDW_HMAC_SHA256': hmac_data
+        }
+    }).then(function(response) {
+        console.log(response);
+        res.render('/decline')
+    })
+    .catch(function(err) {
+        console.log("Error: " + err)
+        res.render('/decline')
+    })
 });
 
 router.post('/cancel', function(req,res){
-    res.send("Subscription cancelled");
-    //redirect back to classes list or checkout page?
+    var user_info = {
+        "Source": "Maison",
+        "id": req.body.ssl_customer_code.slice(2),
+    }
+    
+    user_info = JSON.stringify(user_info);
 
-    console.log("cancel");
+    
+    //get HMAC header
+    var hmac = crypto.createHmac('sha256', config.pdw_secret)
+    //passing the data to be hashed
+    var data = hmac.update(user_info);
+    //creating the hmac in the required format
+    var hmac_data = data.digest('hex');
+
+    fetch(config.pdwURL + 'incoming_web_customer_api/v1_cancelled', {
+        method: 'POST',
+        body: user_info, 
+        headers: {
+            'Content-Type': 'application/json',
+            'HTTP_X_PDW_HMAC_SHA256': hmac_data
+        }
+    }).then(function(response) {
+        console.log(response)
+        res.redirect('/classes')
+    })
+    .catch(function(err) {
+        console.log("Error: " + err)
+        res.redirect('/classes')
+    })
+    
 });
 
 router.post('/success', function(req,res){
-    res.send("Subscription success");
     console.log("success");
 
-    console.log(req.body)
-    //parse converge info
+    var user_info = {
+        "Source": "Maison",
+        "id": req.body.ssl_customer_code.slice(2),
+        "CCSystemReponse": req.body
+    }
     
-    console.log(req.body)
-    
-    var user_info = req.body;
-    user_info["id"] = req.session.RegID;
-    user_info["Source"] = "Maison";
     console.log(user_info)
     user_info = JSON.stringify(user_info);
 
@@ -128,8 +181,17 @@ router.post('/success', function(req,res){
             'Content-Type': 'application/json',
             'HTTP_X_PDW_HMAC_SHA256': hmac_data
         }
-    }) 
-    res.redirect('/confirmation');
+    }).then(function(response) {
+        if(response.status === 200) {
+            res.redirect('/confirmation');
+        } else {
+            res.redirect()
+        }
+    })
+    .catch(function(err) {
+        console.log("Error: " + err)
+    })
+    
 });
 
 
