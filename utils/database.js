@@ -10,6 +10,7 @@ module.exports  = new Sequelize(
     config.database_password,
     {
         host: 'jsys.johnoverton.com',
-        dialect: 'mysql'
+        dialect: 'mysql',
+        logging: false,
     }
 );

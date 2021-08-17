@@ -4,12 +4,13 @@ const User = require('../models/user');
 
 
 router.get('/', function(req, res) {
-    console.log("decline");
-    res.render('decline', {
+    console.log("unexpected");
+    res.render('unexpected', {
         admin: req.session.isAdmin,
-        pageTitle: 'Declined',
+        pageTitle: 'Unexpected',
         isLoggedIn: req.session.isLoggedIn
     });
+
 });
 
 module.exports = router;

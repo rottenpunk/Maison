@@ -1,26 +1,27 @@
-const express    = require('express');
-const http       = require('http');
-const https      = require('https');
-const bodyparser = require('body-parser');
-const session    = require('express-session');
+const express      = require('express');
+const http         = require('http');
+const https        = require('https');
+const bodyparser   = require('body-parser');
+const session      = require('express-session');
 const SessionStore = require('connect-session-sequelize')(session.Store);
-const csrf       = require('csurf');
+const csrf         = require('csurf');
 var flash = require('connect-flash');
+const fs = require("fs");
 
 
-const config     = require("./config/config");
-const database   = require("./utils/database");
-const admin      = require("./routes/admin");
-const login      = require("./routes/login");
-const logout     = require("./routes/logout");
-const welcome    = require("./routes/welcome");
-const passport   = require('passport');
-const classes    = require('./routes/classes');
+const config       = require("./config/config");
+const database     = require("./utils/database");
+const admin        = require("./routes/admin");
+const login        = require("./routes/login");
+const logout       = require("./routes/logout");
+const welcome      = require("./routes/welcome");
+const passport     = require('passport');
+const classes      = require('./routes/classes');
 const registration = require('./routes/registration');
-const checkout   = require('./routes/checkout');
-const converge   = require('./routes/converge');
+const checkout     = require('./routes/checkout');
+const converge     = require('./routes/converge');
 const confirmation = require('./routes/confirmation');
-const decline   = require('./routes/decline')
+const unexpected   = require('./routes/unexpected');
 require("./config/passport");
 
 var app = express();
@@ -43,10 +44,10 @@ database
 
 // Uncomment when we are ready to provide https:// support...
 // Read in the certificate/key...
-//const https_options = {
-//  key: fs.readFileSync("/srv/www/keys/my-site-key.pem"),
-//  cert: fs.readFileSync("/srv/www/keys/chain.pem")
-//};
+const https_options = {
+  key: fs.readFileSync("keys/jsys.johnoverton.com-key.pem"),
+  cert: fs.readFileSync("keys/jsys.johnoverton.com-chain.pem")
+};
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -86,20 +87,23 @@ app.use("/registration", registration);
 app.use("/checkout", checkout);
 app.use("/converge", converge);
 app.use("/confirmation", confirmation);
-app.use("/decline", decline);
+app.use("/unexpected", unexpected);
 
 app.use("/public", express.static("public"));       // Serve up static files from public.
 
 // Last route...
 //app.use(errorController.get404);
 
-http.createServer(app).listen(port, () => {                                                                                                       
-  console.log('Server is up on port ' + port);
-});
+if( port != 0 ) {
+  http.createServer(app).listen(port, () => {                                                                                                       
+    console.log('Server is up on port ' + port);
+  });
+}
 
 // Uncomment when we are ready to provide https:// support...
-//https.createServer(https_options, app).listen(secureport, () => {
-//  console.log('Server is up on secure port ' + secureport);
-//});
-
+if( secureport != 0 ) {
+  https.createServer(https_options, app).listen(secureport, () => {
+    console.log('Server is up on secure port ' + secureport);
+  });
+}
 

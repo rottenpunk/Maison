@@ -12,7 +12,7 @@ router.get('/', function(req, res) {
         pageTitle: 'Checkout',
         isLoggedIn: req.session.isLoggedIn
     });
-console.log(req.session.cart);
+console.log("ID: " + req.session.RegID + " " + req.session.cart);
 });
 
 router.post('/', function(req, res){

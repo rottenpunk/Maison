@@ -10,12 +10,15 @@ const crypto = require('crypto');
 
 router.get('/', function(req, res) {
     console.log("registration");
-    res.render('registration', {
-        admin: req.session.isAdmin,
-        pageTitle: 'Registration',
-        isLoggedIn: req.session.isLoggedIn
-    });
-    
+    if( typeof req.session.RegID !== 'undefined') {
+        res.redirect('/checkout');
+    } else {
+        res.render('registration', {
+            admin: req.session.isAdmin,
+            pageTitle: 'Registration',
+            isLoggedIn: req.session.isLoggedIn
+        });
+    }
 });
 
 
@@ -54,6 +57,9 @@ router.post('/', function(req, res) {
     //creating the hmac in the required format
     var hmac_data = data.digest('hex');
 
+    // Save Parent first/last name for sending to Converge
+    req.session.firstName = form.fname[1];      
+    req.session.lastName  = form.lname[1];
 
     //send 
     fetch(config.pdwURL + 'incoming_web_customer_api/v1_register', {
@@ -76,6 +82,7 @@ router.post('/', function(req, res) {
     })
     .catch(err => {
         console.log("Error: " + err);
+        res.redirect('/unexpected');
     });
     
 });

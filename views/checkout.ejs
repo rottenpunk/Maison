@@ -1,18 +1,13 @@
 <%- include('includes/head.ejs') %>
-    <link rel="stylesheet" href="style.git css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.js"></script>
 
     <script>
     var app = angular.module("exampleApp", []);
     app.controller('defaultCtrl', function ($scope, $http) {
-        $scope.DaysArray = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-        /* $scope.products = [
-            {"ClassID":"713","StartTime":"04:30","EndTime":"05:30","ClassName":"IS INT ACRO JAZZ","Level":"","AgeRange":"7+","Styles":"Acro","Instructor":"Kyle Walker","StudioNumber":"3","DayOfWeek":"Thursday","LengthOfClass":"0","MaximumEnroll":"20","CurrentlyEnrolled":"15"},
-            {"ClassID":"492","StartTime":"03:30","EndTime":"04:30","ClassName":"ZM BEG ACRO JAZZ 7+","Level":"","AgeRange":"7+","Styles":"Acro","Instructor":"Kyle Walker","StudioNumber":"2","DayOfWeek":"Monday","LengthOfClass":"0","MaximumEnroll":"0","CurrentlyEnrolled":"2"},
-            {"ClassID":"708","StartTime":"04:30","EndTime":"05:30","ClassName":"IS BEG ACRO JAZZ 7+","Level":"","AgeRange":"7+","Styles":"Acro","Instructor":"Kyle Walker","StudioNumber":"3","DayOfWeek":"Tuesday","LengthOfClass":"0","MaximumEnroll":"20","CurrentlyEnrolled":"20"},   
-        ]; */
 
+      $scope.DaysArray = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
       $scope.total = "";  
+
       $http({
         method: 'GET',
         url: '/classes/cart',
@@ -22,9 +17,9 @@
         $scope.updateTotal();
         }, function errorCallback(response) {
             console.log("Error: " + response);
+            $window.location.href="/unexpected";            
         });
   
-
     //removes a class from the cart, updates the cart in the backend
     $scope.removeClass = function(p) {
       //confirm user wants to remove the class
@@ -36,7 +31,8 @@
             $scope.products = [];
             $scope.total = "0.00";
             length--;
-          }
+        }
+
         for (var i = 0; i < length; i++) {
           var pdwClass = $scope.products[i];
           if (p.ClassID === pdwClass.ClassID && length>1) {
@@ -47,6 +43,7 @@
           }
           $scope.cart.push(parseInt(pdwClass.ClassID));
         }
+
         //send new cart to backend
         $http({
           method: 'POST',
@@ -55,27 +52,28 @@
         }).then(function successCallback(response) {
             //updates the total tuition
             $scope.updateTotal();
-            
-
           }, function errorCallback(response) {
               console.log("Error: " + response);
+              $window.location.href="/unexpected";
           });
           //returns if user does not want to remove class
         } else {
           return;
         }
       }
+
       //updates total by sending cart to PDW backend
       $scope.updateTotal = function() {
       $http({
           method: 'POST',
           url: '/checkout'
-        }).then(function successCallback(response){
+        }).then( function successCallback(response){
           console.log(response);
           $scope.total = "$" + response.data.Tuition;
           //TODO: change to catch
-        }).then(function errorCallback(response){
+        }, function errorCallback(response){
           console.log("checkout post error: " + response);
+          $window.location.href="/unexpected";
         });
       }
 
