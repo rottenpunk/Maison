@@ -12,7 +12,7 @@ router.get('/', function(req, res) {
         pageTitle: 'Checkout',
         isLoggedIn: req.session.isLoggedIn
     });
-console.log("ID: " + req.session.RegID + " " + req.session.cart);
+    console.log("id: " + req.session.RegID + "  [" + req.session.cart + "]");
 });
 
 router.post('/', function(req, res){
@@ -31,7 +31,7 @@ router.post('/', function(req, res){
         var hmac_data = data.digest('hex');
     
     
-        //send 
+        //send updated list of classes to PDW for this guy...
         fetch(config.pdwURL + 'incoming_web_customer_api/v1_add_classes', {
             method: 'POST',
             body: JSON.stringify(classes), 
@@ -43,12 +43,14 @@ router.post('/', function(req, res){
         .then(response => response.json())
         .then(jsonData => {
             console.log(jsonData);
-            req.session.Tuition = jsonData.Tuition;
-            
+            req.session.Tuition = jsonData.Tuition;            
             res.send(jsonData);
         })
         .catch(err => {
             console.log("Error: " + err);
+            // Notify the front end that PDW is broken, so it can redirect to Unexpected page...
+            var err_resp = {"status": "ERROR", "id": req.session.RegID};
+            res.send(err_resp);
         });
 
 

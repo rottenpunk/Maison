@@ -12,6 +12,7 @@ const config = {
     session_secret: '@The1995SuperSecret@',
 
     // Access to the database system...
+    database_host:     'jsys.johnoverton.com',
     database_name:     'maison', 
     database_username: 'maison', 
     database_password: 'chicken',

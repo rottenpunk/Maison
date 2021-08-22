@@ -81,11 +81,10 @@
           // when the response is available
     
           console.log("success callback");
-          
-          
 
         }, function errorCallback(response) {
             console.log("Error: " + response);
+            $window.location.href="/unexpected";
         });
       }
       $scope.goToReg = function() {

@@ -3,7 +3,7 @@
 
     <script>
     var app = angular.module("exampleApp", []);
-    app.controller('defaultCtrl', function ($scope, $http) {
+    app.controller('defaultCtrl', function ($scope, $http, $window) {
 
       $scope.DaysArray = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
       $scope.total = "";  
@@ -50,6 +50,7 @@
           url: '/classes/cart',
           data: $scope.cart
         }).then(function successCallback(response) {
+            let resp_data = JSON.parse()
             //updates the total tuition
             $scope.updateTotal();
           }, function errorCallback(response) {
@@ -62,14 +63,18 @@
         }
       }
 
-      //updates total by sending cart to PDW backend
+      //updates total by sending cart to Maison backend to send to PDW backend
       $scope.updateTotal = function() {
       $http({
           method: 'POST',
           url: '/checkout'
         }).then( function successCallback(response){
           console.log(response);
-          $scope.total = "$" + response.data.Tuition;
+          if(response.data.status == "ERROR") {
+            $window.location.href="/unexpected";
+          } else {
+            $scope.total = "$" + response.data.Tuition;
+          }
           //TODO: change to catch
         }, function errorCallback(response){
           console.log("checkout post error: " + response);

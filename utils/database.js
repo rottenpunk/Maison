@@ -9,7 +9,7 @@ module.exports  = new Sequelize(
     config.database_username, 
     config.database_password,
     {
-        host: 'jsys.johnoverton.com',
+        host: config.database_host,
         dialect: 'mysql',
         logging: false,
     }
