@@ -91,8 +91,18 @@ app.use("/unexpected", unexpected);
 
 app.use("/public", express.static("public"));       // Serve up static files from public.
 
-// Last route...
-//app.use(errorController.get404);
+// Unknown route.  Redirect back to the Pacific Dance website...
+app.use(function(req, res, next) {
+  res.redirect(config.pacdance_url);
+});
+
+// Error function.
+//app.use(function(err, req, res, next) {
+  //res.redirect('/unexpected');
+//});
+
+
+// Start up server ports...
 
 if( port != 0 ) {
   http.createServer(app).listen(port, () => {                                                                                                       

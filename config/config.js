@@ -21,6 +21,9 @@ const config = {
     pdwURL: 'https://jsys.johnoverton.com/PacificDanceWare/index.php/',
     pdw_secret: '8c4c7f513b667d005516fbf935a6acc4a85c343210af3551ceb451c84a713f03', 
 
+    // Pacific Dance home page...
+    pacdance_url: 'https://pacificdance.net',
+
     // Access to Converge...
     converge_merchantID: "0022776",
     converge_merchantUserID: "apiuser",

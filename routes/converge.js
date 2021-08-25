@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const FinalizeQueue = require('../models/finalize_queue');
 const fetch = require('node-fetch');
 const crypto = require('crypto');
 const config = require('../config/config');
@@ -127,7 +128,8 @@ router.post('/', function(req, res) {
     })
 });
 
-// This endpoint gets redirected to us through the Converge Hosted Payments Page
+
+// This endpoint gets redirected to us from the Converge Hosted Payments Page
 // when the customer has successfully signed up for recurring payments. Here, we:
 //   1. Save the return information from Converge into our finalize_queue table
 //      just incase we are not able to call PDW's v1_finalize endpoint to finalize
@@ -137,41 +139,75 @@ router.post('/', function(req, res) {
 //      account records). If error, then redirect to the "Unexpected" error page.    
 //   3. Redirect to the confirmation page to let the customer know everything was good.
 //
-router.post('/success', function(req,res){
+router.post('/success', function(req, res){
     console.log("success");
 
+    id = req.body.ssl_customer_code.slice(2);
+
+    const new_finalize_queue_element = {
+        NewCustId: id,
+        Processed: ' ',
+        FinalizeJson: JSON.stringify(req.body)
+    };
+    
     var user_info = {
         "Source": "Maison",
-        "id": req.body.ssl_customer_code.slice(2),
+        "id": id,
         "CCSystemResponse": req.body
-    }
+    };
     
-    console.log(user_info)
-    user_info = JSON.stringify(user_info);
+    console.log(JSON.stringify(user_info));
+
+    user_info_str = JSON.stringify(user_info);
     //get HMAC header
-    var hmac = crypto.createHmac('sha256', config.pdw_secret)
+    var hmac = crypto.createHmac('sha256', config.pdw_secret);
     //passing the data to be hashed
-    var data = hmac.update(user_info);
+    var data = hmac.update(user_info_str);
     //creating the hmac in the required format
     var hmac_data = data.digest('hex');
 
-    //post to pdw v1_finalize 
-    fetch(config.pdwURL + 'incoming_web_customer_api/v1_finalize', {
+    save_fqueue_elem = {};
+
+    // Now we have all the variables set up.
+
+    // First, add a new entry into our finalized_queue table so that we can track it in
+    // the unlikely case PDW goes down while we have redirect the customer over to the
+    // Converge Hosted Payments webpage...
+    FinalizeQueue.findOrCreate({where: {NewCustId: id}, defaults: new_finalize_queue_element})
+    .then(([fqueue_elem, create]) => {
+        if(create != true) {
+            throw new Error("Already created a finalize_queue entry for id " + id);
+        }
+        console.log(fqueue_elem.get({plain: true}));
+        save_fqueue_elem = fqueue_elem;   // Save for later updating.
+    })
+
+    // Next, post to pdw v1_finalize. If this fails, we still have the data in 
+    // our finalize_queue and can retry later... 
+    .then(() => fetch(config.pdwURL + 'incoming_web_customer_api/v1_finalize', {
         method: 'POST',
-        body: user_info, 
+        body: user_info_str, 
         headers: {
             'Content-Type': 'application/json',
             'HTTP_X_PDW_HMAC_SHA256': hmac_data
         }
-    })
+    }))
+
+    // Next, check response from Copnverge HPP.  If good, then update finalize element to
+    // say that we successfully did the v1_finalize api call to PDW to finalize
+    // creating a new customer (family and student record) and enrolled customer in
+    // recurring payments and desired classes...
     .then(function(response) {
-        if(response.status === 200) {
-            res.redirect('/confirmation');
-        } else {
+        if(response.status !== 200) {
             console.log("Error: converge.js unexpected http status code from v1_finalize: " + response.status);
             response.text().then( text => console.log(text));
             res.redirect('/unexpected');
+        } else {
+            return save_fqueue_elem.update({Processed: 'X'});
         }
+    })
+    .then((response) => {            
+        res.redirect('/confirmation');
     })
     .catch(function(err) {
         console.log("Error: " + err)
@@ -180,6 +216,9 @@ router.post('/success', function(req,res){
     
 });
 
+// Currently, (according to Converge tech support), Converge will never call
+// the decline endpoint since there is no credit card checking when signing up
+// for a recurring account....
 router.post('/decline', function(req,res){
     var user_info = {
         "Source": "Maison",
