@@ -8,20 +8,20 @@
       $scope.DaysArray = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
       $scope.cartArray = [];
       $scope.cart = [];
+      let class_api_url = '<%-pdwURL%>' + 'class_api';
 
       // Simple GET request example:
       $http({
         method: 'GET',
-        url: 'https://pdw.pacificdance.net/PacificDanceWare/index.php/class_api'
+        url: class_api_url,
       }).then(function successCallback(response) {
           // this callback will be called asynchronously
           // when the response is available
           console.log(response.data);
           $scope.products = response.data;
-
-
         }, function errorCallback(response) {
             console.log("Error: " + response);
+            $window.location.href="/unexpected";  // Redirect to Oops page!
         });
 
        
@@ -119,14 +119,24 @@
           <option class="dropdown-item" value="Hip Hop">Hip Hop</option>
           <option class="dropdown-item" value="Acro">Acro</option>
           <option class="dropdown-item" value="Tap">Tap</option>
+          <option class="dropdown-item" value="Lyrical">Lyrical</option>
+          <option class="dropdown-item" value="Tumble">Tumble</option>          
+          <option class="dropdown-item" value="K-pop">K-pop</option>
+          <option class="dropdown-item" value="Combo">Combo</option>
+          <option class="dropdown-item" value="Musical">Musical</option>                              
         </select>
       
         <select class="btn btn-secondary selectpicker dropdown-toggle m-2 p-2" ng-model="AgeRange" data-style="btn-primary" show-tick>
           <option class="dropdown-item" value="">All Age Ranges</option>
-          <option class="dropdown-item" value="6+">6+</option>
+          <option class="dropdown-item" value="3-5">3-5</option>
+          <option class="dropdown-item" value="4-6">4-6</option>          
+          <option class="dropdown-item" value="5-7">5-7</option>
+          <option class="dropdown-item" value="6-8">6-8</option>          
+          <option class="dropdown-item" value="6+">6+</option>          
           <option class="dropdown-item" value="7+">7+</option>
           <option class="dropdown-item" value="8+">8+</option>
           <option class="dropdown-item" value="10+">10+</option>
+          <option class="dropdown-item" value="13+">13+</option>          
           <option class="dropdown-item" value="Adult">Adult</option>
         </select>
       

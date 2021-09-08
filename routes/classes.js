@@ -11,26 +11,22 @@ router.get('/', function(req, res) {
     res.render('classes', {
         admin: req.session.isAdmin,
         pageTitle: 'Classes',
-        isLoggedIn: req.session.isLoggedIn
+        isLoggedIn: req.session.isLoggedIn,
+        pdwURL: config.pdwURL,
     });
 });
 
 router.post('/cart', function(req, res) {
     // save cart into session
     //console.log(req.body);
-
-
     req.session.cart = req.body;
-    
-    
-    // redirect to registration page
 
-    res.render('classes', {
-        admin: req.session.isAdmin,
-        pageTitle: 'Classes',
-        isLoggedIn: req.session.isLoggedIn
-    });
-    
+    //res.render('classes', {
+    //    admin: req.session.isAdmin,
+    //    pageTitle: 'Classes',
+    //    isLoggedIn: req.session.isLoggedIn
+    //});
+    res.send('{ "Status":"OK" } ');
 });
 
 router.get('/cart', function(req, res) {
